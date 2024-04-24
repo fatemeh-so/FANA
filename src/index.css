@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  /* define 1 rem  */
+  /* 1 rem  =4 */
+  font-size: 87.5%;
+}
+body {
+  box-sizing: border-box;
+  /* <uniquifier>: Use a unique and descriptive class name
+     <weight>: Use a value from 300 to 900 */
+
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+   font-weight: 400;
+  /*font-style: normal; */
+}
