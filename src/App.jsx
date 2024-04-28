@@ -7,8 +7,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NextUIProvider } from '@nextui-org/react'
 import AppLayout from './components/AppLayout'
 import MyPlaylist from './pages/MyPlaylist'
-import Login from './pages/Login'
 import PageNotFound from './pages/PageNotFound'
+import Albums from './pages/Albums'
+import User from './pages/user'
+import { DeleteHeaderProvider } from './contexts/deleteHeaderContext'
+import { OpenPlayerProvider } from './contexts/openPlayerContext'
+import SignUp from './pages/SignUp'
+import Login from './pages/Login'
+// import SignUp from './features/user/SignUp'
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -24,19 +30,26 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
 
-          <GlobalStyles />
-          <BrowserRouter>
-            <Routes>
-              <Route element={<AppLayout />}>
-                <Route index element={<Navigate replace to='home' />} />
-                <Route path='home' element={<Home />} />
-                <Route path='myPlaylist' element={<MyPlaylist />} />
-                <Route path='login' element={<Login />} />
-                <Route path='*' element={<PageNotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <DeleteHeaderProvider>
+            <OpenPlayerProvider>
+              <GlobalStyles />
+              <BrowserRouter>
+                <Routes>
+                  <Route element={<AppLayout />}>
+                    <Route index element={<Navigate replace to='home' />} />
+                    <Route path='home' element={<Home />} />
+                    <Route path='albums' element={<Albums />} />
+                    <Route path='Playlist' element={<MyPlaylist />} />
+                    <Route path='user' element={<User />} />
+                    <Route path='*' element={<PageNotFound />} />
+                    <Route path='signup' element={<SignUp/>}/>
+                    <Route path='login' element={<Login/>}/>
 
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </OpenPlayerProvider>
+          </DeleteHeaderProvider>
           <Toaster
             position='top-center'
             gutter={12}

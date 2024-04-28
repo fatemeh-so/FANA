@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 import { nextui } from '@nextui-org/react'
+import plugin from 'tailwindcss'
 
 export default {
   content: [
@@ -24,8 +25,9 @@ export default {
       themes: {
         dark: {
           "colors": {
+            // bg of 
             "background": {
-              "DEFAULT": "#808080",
+              "DEFAULT": "#2d2e37",
               "foreground": "#fafafa"
             },
             "content1": "#141414",
@@ -43,12 +45,13 @@ export default {
               "700": "#e8e8e8",
               "800": "#f5f5f5",
               "900": "#fafafa",
-              "DEFAULT": "#FFFFFF"
+              "DEFAULT": "#2d2e37"
             },
             "default": {
-              "50": "#262626",
-              "100": "#525252",
-              "200": "#787878",
+              "50": "#374151",
+              // bg of tab
+              "100": "#374151",
+              "200": "#030712",
               "300": "#a3a3a3",
               "400": "#c7c7c7",
               "500": "#d1d1d1",
@@ -56,15 +59,15 @@ export default {
               "700": "#e8e8e8",
               "800": "#f5f5f5",
               "900": "#fafafa",
-              "DEFAULT": "#787878",
-              "foreground": "#fafafa"
+              "DEFAULT": "#2d2e37",
+              "foreground": "#94a3b8"
             },
             "divider": "#a3a3a3",
             "focus": "#FCFCFF",
             "foreground": {
               "50": "#262626",
               "100": "#525252",
-              "200": "#787878",
+              "200": "##030712",
               "300": "#a3a3a3",
               "400": "#c7c7c7",
               "500": "#d1d1d1",
@@ -126,12 +129,28 @@ export default {
               "700": "#d9d8f8",
               "800": "#eeeefc",
               "900": "#f6f6fd",
-              "DEFAULT": "#3D3BBF"
+              "DEFAULT": "#3c3abe"
             }
           },
           "extend": "dark"
         }
       },
-    }),
+    }), plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+
+          /* Firefox */
+          'scrollbar-width': 'none',
+
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }
+      }
+      )
+    })
   ],
 }

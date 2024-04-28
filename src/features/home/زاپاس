@@ -1,0 +1,151 @@
+import { Button, Image, ScrollShadow } from '@nextui-org/react'
+import {
+  CaretLeft,
+  CaretRight,
+  GreaterThan,
+  MusicNotesSimple,
+  PlayCircle,
+} from '@phosphor-icons/react'
+import { useState } from 'react'
+// import cover from "../../../public/coverArt/cover.jpg.webp"
+function HomeAlbum() {
+  const [left, setLeft] = useState(false)
+  function handelImage() {
+    setLeft((left) => !left)
+  }
+  function test() {
+    console.log('im here')
+  }
+  return (
+    <div className='relative'>
+      {/* COVER ART*/}
+      {/* <ScrollShadow
+        hideScrollBar
+        offset={100}
+        orientation='horizontal'
+        className=''
+      > */}{' '}
+      <h1 className=' mt-[4rem] ml-5 text-[2rem]'>Trending right now</h1>
+      <div className='flex gap-[2rem] relative overflow-hidden'>
+        <div
+          className={
+            left
+              ? 'absolute sm:-right-0  -right-[13rem] w-[20rem] overflow-hidden'
+              : ''
+          }
+        >
+          <img
+            src='https://nextui-docs-v2.vercel.app/images/album-cover.png'
+            className='w-[17rem] h-[13rem] rounded-[3rem] mt-[1rem] overflow-hidden '
+          />
+        </div>
+
+        <div
+          onClick={test}
+          className={
+            left
+              ? ''
+              : 'absolute sm:-right-0 sm:relative -right-[13rem] w-[20rem] overflow-hidden'
+          }
+        >
+          <img
+            src='https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg'
+            className='w-[17rem] h-[13rem] rounded-[3rem] mt-[1rem] '
+          />
+        </div>
+      </div>
+      <div>
+        <button  onClick={handelImage}className=' mt-[1rem] absolute top-[9rem] left-[.2rem] md:hidden  flex z-10 items-center justify-center bg-gray-700/60  w-[2rem] h-[2rem] rounded-[.5rem]'>
+          <CaretRight size={18} color='#fffaff' />
+        </button>
+     
+        {/* ALBUM DETAILS  */}
+        <div
+          className={
+            left
+              ? ' overflow-hidden bg-pink-400/80 absolute left-[2rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] '
+              : 'overflow-hidden bg-indigo-400/80 absolute left-[2rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] '
+          }
+        >
+          {left ? (
+            <>
+              <p className=' text-[0.9rem] '>Golden Hours</p>
+              <div className='flex'>
+                <span className='flex gap-1'>
+                  <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
+                  <p>music - JVKE</p>
+                </span>
+                <div className='flex absolute left-[8rem] top-[0.9rem] '>
+                  <span>
+                    <PlayCircle size={44} color='#f6f9f7' weight='fill' />
+                  </span>
+                </div>
+              </div>
+              <p></p>
+            </>
+          ) : (
+            <>
+              <p className=' text-[0.9rem] '>Hotel California</p>
+              <div className='flex'>
+                <span className='flex gap-1'>
+                  <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
+                  <p>music - Eagles</p>
+                </span>
+                <div className='flex absolute left-[8rem] top-[0.9rem] '>
+                  <span>
+                    <PlayCircle size={44} color='#f6f9f7' weight='fill' />
+                  </span>
+                </div>
+              </div>
+              <p></p>
+            </>
+          )}
+        </div>
+      </div>
+      <div
+        className={
+          left
+            ? 'bg-indigo-400/80 absolute left-[20rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] overflow-hidden '
+            : 'bg-pink-400/80 absolute left-[20rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] sm:left-[21rem] overflow-hidden'
+        }
+      >
+        {!left ? (
+          <>
+            <p className=' text-[0.9rem] '>Golden Hours</p>
+            <div className='flex'>
+              <span className='flex gap-1'>
+                <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
+                <p>music - JVKE</p>
+              </span>
+              <div className='flex absolute left-[8rem] top-[0.9rem] '>
+                <span>
+                  <PlayCircle size={44} color='#f6f9f7' weight='fill' />
+                </span>
+              </div>
+            </div>
+            <p></p>
+          </>
+        ) : (
+          <>
+            <p className=' text-[0.9rem] '>Hotel California</p>
+            <div className='flex'>
+              <span className='flex gap-1'>
+                <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
+                <p>music - Eagles</p>
+              </span>
+              <div className='flex absolute left-[8rem] top-[0.9rem] '>
+                <span>
+                  <PlayCircle size={44} color='#f6f9f7' weight='fill' />
+                </span>
+              </div>
+            </div>
+            <p></p>
+          </>
+        )}
+      </div>
+      {/* </ScrollShadow> */}
+    </div>
+  )
+}
+
+export default HomeAlbum

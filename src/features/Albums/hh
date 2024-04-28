@@ -1,0 +1,65 @@
+function Album({ album }) {
+  const albums = [
+    {
+      id: 1,
+      title: 'album title',
+      genre: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      description: 'album description',
+    },
+    {
+      id: 2,
+      title: 'album title',
+      genre: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      description: 'album description',
+    },
+    {
+      id: 3,
+      title: 'album title',
+      genre: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      description: 'album description',
+    },
+    {
+      id: 4,
+      title: 'album title',
+      genre: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      description: 'album description',
+    },
+    {
+      id: 5,
+      title: 'album title',
+      genre: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      description: 'album description',
+    },
+  ]
+  const { id, genre, coverArt, description, title } = album
+  return (
+    <>
+      <div className='flex items-start justify-around   '>
+        {/* cover music */}
+        <div className='flex flex-col  h-[100%] justify-start items-center  '>
+          <img src={coverArt} className='w-[11rem] m-3 rounded-[1rem] ' />
+          {/* details music */}
+          <div className='ml-[1.4rem] flex flex-col w-[100%] bg-red-80'>
+            <h1 className='text-[1.2rem] '>{title}</h1>
+            <p className='text-[0.8rem]'>{description}</p>
+          </div>
+        </div>
+        <div className='flex flex-col  h-[100%] justify-start  items-center '>
+          <img src={coverArt} className='w-[11rem] m-3 rounded-[1rem] ' />
+          {/* details music */}
+          <div className='ml-[1.4rem] flex flex-col w-[100%] bg-red-80'>
+            <h1 className='text-[1.2rem] '>{title}</h1>
+            <p className='text-[0.8rem]'>{description}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Album

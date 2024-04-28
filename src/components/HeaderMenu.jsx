@@ -1,16 +1,23 @@
 import { Button } from '@nextui-org/react'
-import { List } from '@phosphor-icons/react'
+import { List, X } from '@phosphor-icons/react'
 
-function HeaderMenu() {
+function HeaderMenu({ handelMenu, isOpen }) {
+  //   const [isOpen, setIsOpen] = useState(true)
   return (
-    <div>
-      <Button
-        // color='primary'
-        className=' rounded-[0.8rem] bg-gray-700/55  p-[2em]'
-      >
-        <List size={25} color='#f2f2f2' />
-      </Button>
-    </div>
+    <>
+      <div className=' relative flex  '>
+        <Button
+          onClick={handelMenu}
+          className=' rounded-[0.8rem] bg-gray-700/55  p-[2em]'
+        >
+          {isOpen ? (
+            <X size={25} color='#f2f2f2' />
+          ) : (
+            <List size={25} color='#f2f2f2' />
+          )}
+        </Button>
+      </div>
+    </>
   )
 }
 
