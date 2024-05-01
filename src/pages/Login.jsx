@@ -18,7 +18,7 @@ function Login() {
   return (
     <div className='h-[100vh] flex flex-col justify-center it w[100vh]'>
       {/* <BottomHeader  /> */}
-      <BottomHeader leftContent={false} size='small' to='home' />
+      <BottomHeader icon="user" to="home" />
       <form
         className='flex h-[100%]  w-[100%]  justify-center  items-center mt-[-1rem] '
         onSubmit={handleSubmit(onSubmit)}

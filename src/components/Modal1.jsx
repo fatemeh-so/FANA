@@ -46,6 +46,7 @@ export default function Modal1() {
         backdrop="blur"
         onOpenChange={onOpenChange}
         onClose	={handelPlayMusic}
+        size="5xl"
       >
         <ModalContent>
           {(onClose) => (

@@ -11,7 +11,7 @@ export default function Filter() {
     // console.log(key);
   }
   return (
-    <div className='flex sm:hidden flex-wrap gap-4 mt-[2rem] sm:no-scrollbar '>
+    <div className='flex  flex-wrap gap-4 mt-[2rem] overflow-hidden '>
       {/* <ScrollShadow hideScrollBar className=''> */}
         {colors.map((color) => (
           <Tabs

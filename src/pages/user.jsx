@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import SignUp from './SignUp'
 import { useNavigate } from 'react-router-dom'
+import BottomHeader from '../components/BottomHeader'
 // import Form from "../../ui/Form";
 
 // Email regex: /\S+@\S+\.\S+/
@@ -8,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function User() {
   const navigate = useNavigate()
 
-  const isAuthenticated = false
+  const isAuthenticated = true
 
   useEffect(
     function () {
@@ -19,7 +20,9 @@ function User() {
     [isAuthenticated]
   )
 
-  return <div className='h-[85vh]  '></div>
+  return <div className='h-[85vh]  '>
+    <BottomHeader icon="user"/>
+  </div>
 }
 
 export default User

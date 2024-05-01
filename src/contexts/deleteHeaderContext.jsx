@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 
 const DeleteHeaderContext = createContext()
 function DeleteHeaderProvider({ children }) {
-  const [close, setClose] = useState()
+  const [close, setClose] = useState(true)
   function handelCloseHeader(value ) {
     
     setClose(value)

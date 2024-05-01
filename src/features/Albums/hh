@@ -1,62 +1,59 @@
-function Album({ album }) {
-  const albums = [
-    {
-      id: 1,
-      title: 'album title',
-      genre: '',
-      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-      description: 'album description',
-    },
-    {
-      id: 2,
-      title: 'album title',
-      genre: '',
-      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-      description: 'album description',
-    },
-    {
-      id: 3,
-      title: 'album title',
-      genre: '',
-      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-      description: 'album description',
-    },
-    {
-      id: 4,
-      title: 'album title',
-      genre: '',
-      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-      description: 'album description',
-    },
-    {
-      id: 5,
-      title: 'album title',
-      genre: '',
-      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-      description: 'album description',
-    },
-  ]
-  const { id, genre, coverArt, description, title } = album
+/* eslint-disable react/prop-types */
+import BottomHeader from '../../components/BottomHeader'
+import { useSearchParams } from 'react-router-dom'
+import { useOpenAlbum } from '../../contexts/openAlbumContext'
+import AlbumTrack from './AlbumTrack'
+
+
+
+function Album({albums,musics}) {
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // const [openAlbum, setOpenAlbum] = useState(false)
+  function handelAlbum(album) {
+    searchParams.set('playlist', album)
+    setSearchParams(searchParams)
+    if (searchParams.get('playlist', album)) {
+      // setOpenAlbum(false)
+    }
+  }
+  const { isOpenAlbum, handelOpenAlbum } = useOpenAlbum()
   return (
     <>
-      <div className='flex items-start justify-around   '>
-        {/* cover music */}
-        <div className='flex flex-col  h-[100%] justify-start items-center  '>
-          <img src={coverArt} className='w-[11rem] m-3 rounded-[1rem] ' />
-          {/* details music */}
-          <div className='ml-[1.4rem] flex flex-col w-[100%] bg-red-80'>
-            <h1 className='text-[1.2rem] '>{title}</h1>
-            <p className='text-[0.8rem]'>{description}</p>
+      <div>
+        {!isOpenAlbum && <BottomHeader  />}
+        <h1 className='my-4 text-[2rem] '>
+          {!isOpenAlbum && 'Library'}
+        </h1>
+
+        {!isOpenAlbum && (
+          <div className=' grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4'>
+            {albums?.map((albums, index) => (
+              <div key={index} className='relative '>
+                <img
+                  src={albums.coverArt}
+                  onClick={() => {
+                    handelOpenAlbum()
+                    handelAlbum(albums.title)
+                  }}
+                  alt={albums.title}
+                  className='w-full h-auto object-cover rounded-[2rem] '
+                />
+                <div className='absolute rounded-b-[2rem] bottom-0 left-0 w-full bg-black bg-opacity-30 text-white p-2'>
+                  <p className=' pl-2 text-sm md:text-lg xl:text-xl font-semibold '>
+                    {albums.title}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-        <div className='flex flex-col  h-[100%] justify-start  items-center '>
-          <img src={coverArt} className='w-[11rem] m-3 rounded-[1rem] ' />
-          {/* details music */}
-          <div className='ml-[1.4rem] flex flex-col w-[100%] bg-red-80'>
-            <h1 className='text-[1.2rem] '>{title}</h1>
-            <p className='text-[0.8rem]'>{description}</p>
-          </div>
-        </div>
+        )}
+        {/* when click on album then AlbumTrack will open */}
+        {isOpenAlbum && (
+          <>
+         <AlbumTrack musics={musics}/>
+          </>
+        )}
       </div>
     </>
   )

@@ -180,9 +180,9 @@ function MyPlaylist() {
     <>
       <div className='h-[85vh] '>
         {/* <BottomHeader /> */}
-        <BottomHeader leftContent={false} size='small' />
+        <BottomHeader  sze='small' />
 
-        <h1 className='mt-[1rem] text-[2rem] '>My Playlist</h1>
+        <h1 className='mt-[1rem] text-[2rem] text-white1 z-30 '>My Playlist</h1>
         <div className=' relative flex flex-col  w-[100%]'>
           {musics.map((music) => (
             <HomeMusicChild key={music.id} music={music} />

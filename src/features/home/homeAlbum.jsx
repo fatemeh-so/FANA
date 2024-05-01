@@ -94,10 +94,50 @@ export default function HomeAlbum() {
       coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
       PlayCount: 2,
     },
+    {
+      id: 10,
+      title: 'Falling slowly',
+      artist: 'Glen Hansard',
+      singerId: 2,
+      AlbumId: 2,
+      duration: '03:08',
+      url: '',
+      lyric: '',
+      coverArt:'https://nextui-docs-v2.vercel.app/images/album-cover.png',
+      PlayCount: 2,
+    },
+    {
+      id: 11,
+      title: 'Caving in',
+      artist: 'Syml',
+      singerId: 3,
+      AlbumId: 3,
+      duration: '03:08',
+      url: '',
+      lyric: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      PlayCount: 2,
+    },
+    {
+      id: 11,
+      title: 'Caving in',
+      artist: 'Syml',
+      singerId: 3,
+      AlbumId: 3,
+      duration: '03:08',
+      url: '',
+      lyric: '',
+      coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
+      PlayCount: 2,
+    },
   ]
   const [translateX, setTranslateX] = useState(0);
-  const galleryWidth = trendMusic.length * 100 + (trendMusic.length - 1) * 20; // Calculate the total width of the gallery
-
+  // const galleryWidth = trendMusic.length * 64 + (trendMusic.length - 1) * 20; // Calculate the total width of the gallery
+  const albumWidth = 64; // Width of each album item in pixels
+  const spaceBetweenAlbums = 4; // Margin-right between each album item in pixels
+  const numberOfAlbums = trendMusic.length;
+  const maxWidth = numberOfAlbums * (albumWidth + spaceBetweenAlbums) - spaceBetweenAlbums;
+  
   const moveLeft = () => {
     const newPosition = translateX + 120; // Adjust the movement distance as needed
     setTranslateX(Math.min(0, newPosition)); // Ensure translation does not exceed 0
@@ -105,8 +145,8 @@ export default function HomeAlbum() {
 
   const moveRight = () => {
     const newPosition = translateX - 120; // Adjust the movement distance as needed
-    const maxTranslate = -galleryWidth + 20; // Calculate the maximum translation to show only images
-    setTranslateX(Math.max(maxTranslate, newPosition)); // Ensure translation does not exceed the maximum
+    const maxTranslate = -maxWidth +20 ; // Calculate the maximum translation to show only images
+    setTranslateX(Math.max( newPosition,maxTranslate)); // Ensure translation does not exceed the maximum
   };
 
   return (
@@ -117,11 +157,11 @@ export default function HomeAlbum() {
             <img src={album.coverArt} alt={album.title} className="w-full h-full rounded-[1rem] object-cover" />
             <div className="absolute inset-0 flex items-center justify-center  bg-opacity-50">
               <div className='text-white     overflow-hidden bg-blue1/30 absolute left-[2rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] '>
-                <p className=' text-[0.9rem] '>Golden Hours</p>
+                <p className=' text-[0.9rem] '>{album.title}</p>
               <div className='flex'>
                 <span className='flex gap-1'>
                   <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
-                  <p>music - {album.title}</p>
+                  <p>music - {album.artist}</p>
                 </span>
                 <div className='flex absolute left-[8rem] top-[0.9rem] '>
                   <span>
@@ -142,7 +182,7 @@ export default function HomeAlbum() {
         &lt;
       </button>
       <button
-        className={`rounded-l-[1rem]   absolute inset-y-0 right-0 z-10 bg-black bg-opacity-50 text-white p-2 ${-translateX >= galleryWidth - 20 ? 'hidden' : ''}`}
+        className={`rounded-l-[1rem]   absolute inset-y-0 right-0 z-10 bg-black bg-opacity-50 text-white p-2 ${-translateX >= maxWidth - 20 ? 'hidden' : ''}`}
         onClick={moveRight}
       >
         &gt;

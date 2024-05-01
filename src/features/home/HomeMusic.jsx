@@ -108,7 +108,7 @@ function HomeMusic() {
      <ScrollShadow hideScrollBar   
       offset={100}
       orientation="horizontal" 
-      className="max-w-[100%]  max-h-[58vh]">
+      className="max-w-[100%]  max-h-[53vh]">
       {musics.map((music) => (
         <HomeMusicChild key={music.id} music={music} />
       ))}</ScrollShadow>

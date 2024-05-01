@@ -13,23 +13,29 @@ import {
 } from '@nextui-org/react'
 // import { Input } from "postcss";
 import { MagnifyingGlass } from '@phosphor-icons/react'
+import { NavLink } from 'react-router-dom'
+import { useDeleteHeader } from '../contexts/deleteHeaderContext'
+import SearchInput from './SearchInput'
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
-  ]
+const{handelCloseHeader}=useDeleteHeader()
+  // const menuItems = [
+  //   // 'Profile',
+  //   // 'Dashboard',
+  //   // 'Activity',
+  //   // 'Analytics',
+  //   // 'System',
+  //   // 'Deployments',
+  //   // 'My Settings',
+  //   // 'Team Settings',
+  //   // 'Help & Feedback',
+  //   'Home',
+  //   'Albums',
+  //   'Playlist',
+  //   'Sign Up',
+  // ]
 
   return (
     <div className='  h-[3vh] w-[100%]'>
@@ -59,11 +65,11 @@ export default function Header() {
               Customers
             </Link>
           </NavbarItem>
-          <NavbarItem>
+          {/* <NavbarItem>
             <Link color='foreground' href='#'>
               Integrations
             </Link>
-          </NavbarItem>
+          </NavbarItem> */}
         </NavbarContent>
 
         <NavbarContent justify='end'>
@@ -74,61 +80,28 @@ export default function Header() {
             {/* <Button as={Link} color="warning" href="#" variant="flat">
             Sign Up
           </Button> */}
-            <Input
-              // label='Search'
-              isClearable
-              radius='sm'
-              classNames={{
-                label: 'text-black/50 dark:text-white/90',
-                input: [
-                  'w-[20rem] sm:w-[10rem]',
-                  'bg-transparent',
-                  'text-black/90 dark:text-white/90',
-                  'placeholder:text-default-700/50 dark:placeholder:text-white/60',
-                ],
-                innerWrapper: 'bg-transparent',
-                inputWrapper: [
-                  'shadow-xl',
-                  'bg-default-200/50',
-                  'dark:bg-default/60',
-                  'backdrop-blur-xl',
-                  'backdrop-saturate-200',
-                  'hover:bg-default-200/70',
-                  'dark:hover:bg-default/70',
-                  'group-data-[focused=true]:bg-default-200/50',
-                  'dark:group-data-[focused=true]:bg-default/60',
-                  '!cursor-text',
-                ],
-              }}
-              placeholder='search...'
-              startContent={
-                <MagnifyingGlass />
-                // <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
-              }
-            />
+      <SearchInput/>
           </NavbarItem>
         </NavbarContent>
-
-        <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className='w-full'
-                color={
-                  index === 2
-                    ? 'warning'
-                    : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
-                }
-                href='#'
-                size='lg'
-              >
-                {item}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+<div className='h-[10%]'>
+        <NavbarMenu  >
+          {/* {menuItems.map((item, index) => ( */}
+          <NavbarMenuItem className='h-[50vh]'  >
+            <Link    className='w-full' color={'foreground'} href='' size='lg'>
+              <NavLink to='/home'>Home</NavLink>
+            </Link>
+            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
+              <NavLink to='/albums'>Albums</NavLink>
+            </Link>
+            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
+              <NavLink to='/playlist'>Playlist</NavLink>
+            </Link>
+            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
+              <NavLink to='/signup'>Sign Up</NavLink>
+            </Link>
+          </NavbarMenuItem>
+          {/* ))} */}
+        </NavbarMenu></div>
       </Navbar>
     </div>
   )

@@ -18,7 +18,7 @@ function SignUp() {
   return (
     <div className='h-[100vh] flex flex-col justify-center it w[100vh]'>
       {/* <BottomHeader  /> */}
-      <BottomHeader leftContent={false} size='small' to='home' />
+      <BottomHeader leftContent={false}  to="home"  />
       <form
         className='flex h-[100%]  w-[100%]  justify-center  items-center mt-[-1rem] '
         onSubmit={handleSubmit(onSubmit)}
@@ -94,7 +94,7 @@ function SignUp() {
           </div>
           <button
             onClick={handelToLogin}
-            className='text-default-500 text-small ml-[1rem] text-blue1'
+            className='text-default-500 text-small ml-[1rem] text-blue-600'
           >
             Have an account?
           </button>
