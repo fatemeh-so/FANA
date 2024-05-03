@@ -13,21 +13,26 @@ export default function Filter() {
   return (
     <div className='flex  flex-wrap gap-4 mt-[2rem] overflow-hidden '>
       {/* <ScrollShadow hideScrollBar className=''> */}
-        {colors.map((color) => (
-          <Tabs
-            key={color}
-            color={color}
-            aria-label='Tabs colors'
-            radius='sm'
-            onSelectionChange={(key) => handel(key)}
-          >
-            <Tab key='trend' title='Trending Right Now' />
-            <Tab key='pop' title='Pop' />
-            <Tab key='hiphop' title='Hip Hop' />
-            <Tab key='rock' title='Metal Rock' />
+      {colors.map((color) => (
+        <Tabs
+          key={color}
+          color={color}
+          aria-label='Tabs colors'
+          radius='sm'
+          onSelectionChange={(key) => handel(key)}
+        >
+          <Tab key='all' title='All' />
+          {/* <Tab key='trend' title='Trending Right Now' /> */}
+          <Tab key='pop' title='Pop' />
+          <Tab key='hiphop' title='Hip Hop' />
+          <Tab key='traditional' title='Traditional' />
+          <Tab key='rock' title=' Rock' />
+          <Tab key='instrumental' title=' Instrumental' />
+          <Tab key='alternative' title=' Alternative' />
 
-          </Tabs>
-        ))}{' '}
+
+        </Tabs>
+      ))}{' '}
       {/* </ScrollShadow> */}
     </div>
   )

@@ -4,9 +4,7 @@ import { MagnifyingGlass, XCircle } from '@phosphor-icons/react'
 import SearchResult from './SearchResult'
 import { useSearchFocus } from '../contexts/FocusSearchContext'
 
-const musics = [
-  // Your music data here
-]
+
 
 const SearchInput = () => {
   const {
@@ -16,11 +14,13 @@ const SearchInput = () => {
     searchValue,
     handleSearch,
     setSearchFocus,
+    setSearchValue
   } = useSearchFocus()
 
   const handleClearInput = () => {
     // Clear the search value when the clear icon is clicked
     setSearchFocus(false)
+    // setSearchValue(null)
   }
 
   return (

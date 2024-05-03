@@ -1,137 +1,15 @@
 import { createContext, useContext, useState } from 'react'
-const musics = [
-  {
-    id: 3,
-    title: 'Lili',
-    artist: 'Aaron',
-    singerId: 1,
-    AlbumId: 1,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/cover.jpg.webp',
-    PlayCount: 1,
-  },
-  {
-    id: 4,
-    title: 'Falling slowly',
-    artist: 'Glen Hansard',
-    singerId: 2,
-    AlbumId: 2,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: 'https://nextui-docs-v2.vercel.app/images/album-cover.png',
-    PlayCount: 2,
-  },
-  {
-    id: 5,
-    title: 'Caving in',
-    artist: 'Syml',
-    singerId: 3,
-    AlbumId: 3,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    PlayCount: 2,
-  },
-  {
-    id: 6,
-    title: 'love story',
-    artist: 'Taylor Swift',
-    singerId: 3,
-    AlbumId: 3,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/retro-synthwave-artwork.jpg',
-    PlayCount: 2,
-  },
-  {
-    id: 7,
-    title: 'Lili',
-    artist: 'Aaron',
-    singerId: 1,
-    AlbumId: 1,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/cover.jpg.webp',
-    PlayCount: 1,
-  },
-  {
-    id: 8,
-    title: 'Falling slowly',
-    artist: 'Glen Hansard',
-    singerId: 2,
-    AlbumId: 2,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: 'https://nextui-docs-v2.vercel.app/images/album-cover.png',
-    PlayCount: 2,
-  },
-  {
-    id: 9,
-    title: 'Caving in',
-    artist: 'Syml',
-    singerId: 3,
-    AlbumId: 3,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    PlayCount: 2,
-  },
-  {
-    id: 10,
-    title: 'love story',
-    artist: 'Taylor Swift',
-    singerId: 3,
-    AlbumId: 3,
-    duration: '03:08',
-    url: '',
-    lyric: '',
-    coverArt: '/public/coverArt/retro-synthwave-artwork.jpg',
-    PlayCount: 2,
-  },
-]
-const albums = [
-  {
-    id: 1,
-    title: 'happy ',
-    genre: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    description: 'album description',
-  },
-  {
-    id: 2,
-    title: 'sad ',
-    genre: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    description: 'album description',
-  },
-  {
-    id: 3,
-    title: 'chill ',
-    genre: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    description: 'album description',
-  },
-  {
-    id: 4,
-    title: 'road ',
-    genre: '',
-    coverArt: '/public/coverArt/ea1f64668a0af149a3277db9e9e54824.jpg',
-    description: 'album description',
-  },
-]
+import useAlbum from '../features/Albums/useAlbum'
+import Spinner from '../components/Spinner'
+import useMusic from '../features/home/useMusic'
+
 const FocusSearchContext = createContext()
 function FocusSearchProvider({ children }) {
+  const { data: albums, isLoading } = useAlbum()
+  const { data: music, isLoading: isMusic } = useMusic()
   const [searchFocus, setSearchFocus] = useState(false)
   const [searchResults, setSearchResults] = useState([])
-  const [searchAlbumResult,setSearchAlbumResult]=useState([])
+  const [searchAlbumResult, setSearchAlbumResult] = useState([])
   // onChange
   const [searchValue, setSearchValue] = useState('')
 
@@ -139,11 +17,13 @@ function FocusSearchProvider({ children }) {
     const value = e.target.value
     setSearchValue(value)
     // Filtering music based on search input
-    const resultsMusic = musics.filter((music) => {
+    if (isLoading || isMusic) {
+      return <Spinner />
+    }
+    const resultsMusic = music.filter((music) => {
       return (
         music.title.toLowerCase().includes(value.toLowerCase()) ||
         music.artist.toLowerCase().includes(value.toLowerCase())
-     
       )
     })
     // Filtering Albums based on search input
@@ -152,15 +32,13 @@ function FocusSearchProvider({ children }) {
       return (
         album?.title?.toLowerCase().includes(value?.toLowerCase()) ||
         album?.genre?.toLowerCase().includes(value?.toLowerCase())
-   
-        
       )
     })
-    console.log(searchAlbumResult)
+    // console.log(searchAlbumResult)
 
     setSearchResults(resultsMusic)
     setSearchAlbumResult(resultsAlbums)
-    if(!searchValue){
+    if (!searchValue) {
       setSearchResults([])
       setSearchAlbumResult([])
     }
@@ -172,7 +50,6 @@ function FocusSearchProvider({ children }) {
   //   blur
   const handleInputBlur = (value) => {
     setSearchFocus(value)
-
   }
   return (
     <FocusSearchContext.Provider
@@ -185,7 +62,7 @@ function FocusSearchProvider({ children }) {
         handleSearch,
         setSearchFocus,
         searchAlbumResult,
-        setSearchAlbumResult
+        setSearchAlbumResult,
       }}
     >
       {children}

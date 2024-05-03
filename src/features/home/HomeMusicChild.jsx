@@ -1,14 +1,14 @@
+/* eslint-disable react/prop-types */
 import { ScrollShadow } from '@nextui-org/react'
 import { Heart, User, UserSound } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { useSearchFocus } from '../../contexts/FocusSearchContext'
 
-function HomeMusicChild({ music,h1,to ,heart=true}) {
+function HomeMusicChild({ music, h1, to, heart = true }) {
   const { id, title, artist, coverArt, duration } = music
   const [isLike, setIsLike] = useState(false)
-  const { isOpenPlayer, handelPlayMusic } = useOpenPlayer()
-
+  const { handelPlayMusic } = useOpenPlayer()
 
   function handelLike(e) {
     // e.preventDefault()
@@ -19,7 +19,9 @@ function HomeMusicChild({ music,h1,to ,heart=true}) {
       <ScrollShadow hideScrollBar className=''>
         <div className='  relative flex flex-col w-[100%] border-b-gray-600'>
           <div
-            onClick={() =>{ handelPlayMusic(music)}}
+            onClick={() => {
+              handelPlayMusic(music)
+            }}
             className='flex  mt-[1rem] h-[5rem] '
           >
             <img
@@ -36,12 +38,14 @@ function HomeMusicChild({ music,h1,to ,heart=true}) {
                 </p>
               </div>
               <div className='flex absolute top-[50%]  md:right-[0%] right-[5%]'>
-              { heart &&<Heart
-                  size={22}
-                  weight={!isLike ? 'thin' : 'fill'}
-                  color='#f3e7f4'
-                  onClick={() => handelLike()}
-                />}
+                {heart && (
+                  <Heart
+                    size={22}
+                    weight={!isLike ? 'thin' : 'fill'}
+                    color='#f3e7f4'
+                    onClick={() => handelLike()}
+                  />
+                )}
               </div>
             </div>
           </div>

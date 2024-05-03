@@ -48,7 +48,7 @@ function App() {
                         <Route path='*' element={<PageNotFound />} />
                         <Route path='signup' element={<SignUp />} />
                         <Route path='login' element={<Login />} />
-                        <Route path='albumTrack' element={<AlbumTrack/>}/>
+                        <Route path='/albums/:albumId' element={<AlbumTrack/>}/>
                       </Route>
                     </Routes>
                   </BrowserRouter>

@@ -14,6 +14,7 @@ function Home() {
         <HomeAlbum />
         <Filter />
         <HomeMusic />
+        
         {/* <Laptop /> */}
         {/* </div> */}
       </div>{' '}

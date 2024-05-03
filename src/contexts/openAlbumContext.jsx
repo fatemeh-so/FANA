@@ -5,15 +5,15 @@ function OpenAlbumProvider({ children }) {
   // const [searchParams,setSearchParams]=useSearchParams()
 
   const [isOpenAlbum, setIsOpenAlbum] = useState(false)
-  const [music, setMusic] = useState(null)
-  function handelOpenAlbum(music) {
+  // const [music, setMusic] = useState(null)
+  function handelOpenAlbum() {
     console.log(isOpenAlbum)
     setIsOpenAlbum((isOpenAlbum) => !isOpenAlbum)
-    setMusic(music)
+    // setMusic(music)
   }
   return (
     <OpenAlbumContext.Provider
-      value={{ music, isOpenAlbum, handelOpenAlbum, setIsOpenAlbum }}
+      value={{  isOpenAlbum, handelOpenAlbum, setIsOpenAlbum }}
     >
       {children}
     </OpenAlbumContext.Provider>

@@ -6,13 +6,14 @@ import AlbumTrack from './AlbumTrack'
 
 function Album({ albums }) {
   const [searchParams, setSearchParams] = useSearchParams()
+  // const[title]
   const navigate = useNavigate()
-  function handelAlbum(album) {
-    navigate('/albumTrack')
+  function handelAlbum(id) {
+    navigate(`/albums/${id}`)
   }
   const { isOpenAlbum, handelOpenAlbum } = useOpenAlbum()
   if(isOpenAlbum)
-  return <AlbumTrack/>
+  return <AlbumTrack />
   return (
     <>
       <div>
@@ -26,10 +27,10 @@ function Album({ albums }) {
                 src={albums.coverArt}
                 onClick={() => {
                   handelOpenAlbum()
-                  handelAlbum(albums.title)
+                  handelAlbum(albums.id,albums.title)
                 }}
                 alt={albums.title}
-                className='w-full h-auto object-cover rounded-[2rem] '
+                className='w-full h-full object-cover rounded-[2rem] '
               />
               <div className='absolute rounded-b-[2rem] bottom-0 left-0 w-full bg-black bg-opacity-30 text-white p-2'>
                 <p className=' pl-2 text-sm md:text-lg xl:text-xl font-semibold '>
@@ -41,7 +42,7 @@ function Album({ albums }) {
         </div>
 
         {/* when click on album then AlbumTrack will open */}
-        {isOpenAlbum&&<AlbumTrack/>}
+        {/* {isOpenAlbum&&<AlbumTrack/>} */}
       </div>
     </>
   )
