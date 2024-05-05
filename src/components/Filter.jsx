@@ -11,7 +11,7 @@ export default function Filter() {
     // console.log(key);
   }
   return (
-    <div className='flex  flex-wrap gap-4 mt-[2rem] overflow-hidden '>
+    <div className='flex   flex-wrap gap-4 mt-[2rem] overflow-hidden '>
       {/* <ScrollShadow hideScrollBar className=''> */}
       {colors.map((color) => (
         <Tabs
@@ -19,6 +19,8 @@ export default function Filter() {
           color={color}
           aria-label='Tabs colors'
           radius='sm'
+          // size='lg'
+          fullWidth={true}
           onSelectionChange={(key) => handel(key)}
         >
           <Tab key='all' title='All' />
@@ -29,8 +31,6 @@ export default function Filter() {
           <Tab key='rock' title=' Rock' />
           <Tab key='instrumental' title=' Instrumental' />
           <Tab key='alternative' title=' Alternative' />
-
-
         </Tabs>
       ))}{' '}
       {/* </ScrollShadow> */}

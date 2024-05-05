@@ -2,18 +2,18 @@
 import { Heart } from '@phosphor-icons/react'
 import { useState } from 'react'
 import useAddInPlaylist from '../features/MyPlaylist/useAddInPlaylist'
+
 import Spinner from '../components/Spinner'
 function PlayerButton({ music }) {
   const [isLike, setIsLike] = useState(false)
   const { mutate: addMusic, isLoading } = useAddInPlaylist()
-  // const {  URL, title, coverArt, duration, artist, genre } = music
+ 
   function handelLike() {
-    // e.preventDefault()
     setIsLike((isLike) => !isLike)
-    addMusic({music})
+    if (!isLike) addMusic({ music })
   }
-//  console.log(music);
-  if (isLoading) return <Spinner />
+  //  console.log(music);
+  if (isLoading ) return <Spinner />
   return (
     <div className='flex justify-end'>
       <Heart

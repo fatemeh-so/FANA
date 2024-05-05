@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Modal, useDisclosure } from '@nextui-org/react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import MusicPlayer from './MusicPlayer'
@@ -12,7 +11,7 @@ export default function Modal1() {
     <div className=''>
       <Modal
         isOpen={isOpenPlayer}
-        placement='bottom'
+        // placement='bottom'
         backdrop='blur'
         onOpenChange={onOpenChange}
         onClose={handelPlayMusic}

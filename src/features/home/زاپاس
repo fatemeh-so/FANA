@@ -149,3 +149,606 @@ function HomeAlbum() {
 }
 
 export default HomeAlbum
+// 
+
+
+
+
+{albums?.map((albums, index) => (
+  <div key={index} className='relative '>
+    <img
+      src={albums.coverArt}
+      onClick={() => {
+        handelOpenAlbum()
+        handelAlbum(albums.id,albums.title)
+      }}
+      alt={albums.title}
+      className='w-full h-full object-cover rounded-[.5rem] '
+    />
+    <div className='absolute rounded-b-[2rem] bottom-0 left-0 w-full bg-black bg-opacity-30 text-white p-2'>
+      <p className=' pl-2 text-sm md:text-lg xl:text-xl font-semibold '>
+        {albums.title}
+      </p>
+    </div>
+  </div>
+))}
+
+
+
+// 
+
+import React from 'react'
+import { CardFooter, Image, Button } from '@nextui-org/react'
+import Spinner from '../../components/Spinner'
+import useAlbum from '../Albums/useAlbum'
+import Album from '../Albums/Album'
+import { useNavigate } from 'react-router-dom'
+import { Card, CardHeader, CardBody } from '@nextui-org/react'
+
+import { useOpenAlbum } from '../../contexts/openAlbumContext'
+function HomeBar() {
+  return (
+    <div className='w-[100vh]  h-[50vh] my-[2rem] gap-4 grid grid-cols-12 grid-rows-2 pl-4'>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            What to watch
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Stream the Acme event
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-4.jpeg'
+        />
+      </Card>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            Plant a tree
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Contribute to the planet
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-3.jpeg'
+        />
+      </Card>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            Supercharged
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Creates beauty like a beast
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-2.jpeg'
+        />
+      </Card>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            What to watch
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Stream the Acme event
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-4.jpeg'
+        />
+      </Card>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            Plant a tree
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Contribute to the planet
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-3.jpeg'
+        />
+      </Card>
+      <Card className='col-span-12 sm:col-span-4 h-[230px]'>
+        <CardHeader className='absolute z-10 top-1 flex-col !items-start'>
+          <p className='text-tiny text-white/60 uppercase font-bold'>
+            Supercharged
+          </p>
+          <h4 className='text-white font-medium text-large'>
+            Creates beauty like a beast
+          </h4>
+        </CardHeader>
+        <Image
+          removeWrapper
+          alt='Card background'
+          className='z-0 w-full h-full object-cover'
+          src='https://nextui.org/images/card-example-2.jpeg'
+        />
+      </Card>
+    </div>
+  )
+}
+
+export default HomeBar
+
+
+// 
+
+
+
+
+import { MusicNotesSimple, PlayCircle } from '@phosphor-icons/react'
+import { useState } from 'react'
+import useAlbum from '../../features/Albums/useAlbum'
+import Spinner from '../../components/Spinner'
+
+export default function HomeAlbum() {
+  const { data: albums, isLoading } = useAlbum()
+  const [translateX, setTranslateX] = useState(0)
+
+  // const albumWidth = trendMusic.length * 64 + (trendMusic.length - 1) * 20; // Calculate the total width of the gallery
+  const albumWidth = 54 // Width of each album item in pixels
+  const spaceBetweenAlbums = 4 // Margin-right between each album item in pixels
+  const numberOfAlbums = albums?.length - 1
+  const maxWidth = numberOfAlbums * (albumWidth + spaceBetweenAlbums)
+  console.log(maxWidth)
+  const moveLeft = () => {
+    const newPosition = translateX + 100 // Adjust the movement distance as needed
+    setTranslateX(Math.min(0, newPosition)) // Ensure translation does not exceed 0
+  }
+
+  const moveRight = () => {
+    const newPosition = translateX - 120 // Adjust the movement distance as needed
+    const maxTranslate = -maxWidth + 20 // Calculate the maximum translation to show only images
+    setTranslateX(Math.max(newPosition, maxTranslate)) // Ensure translation does not exceed the maximum
+  }
+  if (isLoading) {
+    return <Spinner />
+  }
+  return (
+    <div className='relative w-full mt-5rem mt-[4rem] overflow-hidden'>
+      <div
+        className='flex'
+        style={{ transform: `translateX(${translateX}px)` }}
+      >
+        {albums.map((album, index) => (
+          <div key={index} className='relative flex-shrink-0 w-64 h-48 mr-4'>
+            <img
+              src={album.coverArt}
+              alt={album.title}
+              className='w-64 h-full rounded-full object-cover'
+            />
+            <div className='absolute inset-0 flex items-center justify-center  bg-opacity-50'>
+              <div className='text-white     overflow-hidden bg-blue1/30 absolute left-[2rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] '>
+                <p className=' text-[0.9rem] '>{album.title}</p>
+                <div className='flex'>
+                  <span className='flex gap-1'>
+                    <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
+                    <p>music - {album.artist}</p>
+                  </span>
+                  <div className='flex absolute left-[8rem] top-[0.9rem] '>
+                    <span>
+                      <PlayCircle size={44} color='#f6f9f7' weight='fill' />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        className={`rounded-r-[1rem] absolute inset-y-0 left-0 z-10 bg-black bg-opacity-50 text-white p-2 ${
+          translateX === 0 ? 'hidden' : ''
+        }`}
+        onClick={moveLeft}
+      >
+        &lt;
+      </button>
+      <button
+        className={`rounded-l-[1rem]   absolute inset-y-0 right-0 z-10 bg-black bg-opacity-50 text-white p-2 ${
+          -translateX >= maxWidth - 20 ? 'hidden' : ''
+        }`}
+        onClick={moveRight}
+      >
+        &gt;
+      </button>
+    </div>
+  )
+}
+
+
+// useEffect(() => {
+  //   const handleEnded = () => {
+  //     // Reset the currentTime to 0 to loop the audio
+  //     if (isRepeat) {
+  //       audio.currentTime = 0
+  //       audio.play()
+  //     }
+  //   }
+
+  //   audio.addEventListener('ended', handleEnded)
+
+  //   return () => {
+  //     audio.removeEventListener('ended', handleEnded)
+  //   }
+  // }, [isRepeat, music, audio])
+
+
+
+
+
+
+
+
+  import { ScrollShadow, User } from '@nextui-org/react'
+import { Heart, Play, UserSound } from '@phosphor-icons/react'
+import HomeMusicChild from './HomeMusicChild'
+import useMusic from './useMusic'
+import Spinner from '../../components/Spinner'
+import { useSearchParams } from 'react-router-dom'
+import Filter from '../../components/Filter'
+import HomeBar from './HomeBar'
+import { useOpenAlbum } from '../../contexts/openAlbumContext'
+import { useOpenPlayer } from '../../contexts/openPlayerContext'
+
+// import { Play } from '@phosphor-icons/react'
+
+function HomeMusic() {
+  const { data: music, isLoading } = useMusic()
+  const [searchParams] = useSearchParams()
+  const filter = searchParams.get('genre')
+  const{currentIndex}=useOpenPlayer()
+  let filteredMusic = []
+
+  if (filter === 'all') {
+    filteredMusic = music
+  }
+  // if (filter === 'trend') {
+  //   filteredMusic = music?.filter((musicItem) => musicItem.genre === "pop");
+  // }
+  if (filter === 'pop') {
+    filteredMusic = music?.filter((musicItem) => musicItem.genre === 'pop')
+  }
+  if (filter === 'hiphop') {
+    filteredMusic = music?.filter((musicItem) => musicItem.genre === 'hiphop')
+  }
+  if (filter === 'rock') {
+    filteredMusic = music?.filter((musicItem) => musicItem.genre === 'rock')
+  }
+  if (filter === 'traditional') {
+    filteredMusic = music?.filter(
+      (musicItem) => musicItem.genre === 'traditional'
+    )
+  }
+  if (filter === 'instrumental') {
+    filteredMusic = music?.filter(
+      (musicItem) => musicItem.genre === 'instrumental'
+    )
+  }
+  if (filter === 'alternative') {
+    filteredMusic = music?.filter(
+      (musicItem) => musicItem.genre === 'alternative'
+    )
+  }
+  // console.log(filteredMusic);
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  const mapMusic = filteredMusic.map((currentValue, index, array) => {
+    const nextValue =   array[index +currentIndex] ||null;
+    const previousValue =  array[index - currentIndex] || null;
+    return {
+      currentValue,
+      nextValue,
+      previousValue
+    };
+  });
+  console.log(music);
+  return (
+    <div className='overflow-y-hidden  w-full'>
+      <ScrollShadow
+        hideScrollBar
+        offset={10}
+        orientation='horizontal'
+        className='  max-h-[53vh] '
+      >
+        <div className='flex overflow-y-scroll'>
+          <div className='w-full '>
+            <Filter />
+            {mapMusic?.map((music, index) => (
+              <HomeMusicChild
+                key={index}
+                music={music.currentValue}
+                nextMusic={music.nextValue}
+                prevMusic={music.previousValue}
+                index={index + 1}
+              />
+            ))}
+          </div>
+        </div>
+      </ScrollShadow>
+    </div>
+  )
+}
+
+export default HomeMusic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react'
+import {
+  ArrowsDownUp,
+  PauseCircle,
+  PlayCircle,
+  Repeat,
+  RepeatOnce,
+  Shuffle,
+  SkipBack,
+  SkipForward,
+} from '@phosphor-icons/react'
+import { ModalContent, ModalHeader } from '@nextui-org/react'
+import { useOpenPlayer } from '../contexts/openPlayerContext'
+import Slider1 from './Slider'
+import PlayerButton from './PlayerButton'
+function MusicPlayer() {
+  const { music, prevMusic, nextMusic ,showNextObject} = useOpenPlayer()
+  const [isRepeat, setIsRepeat] = useState(false)
+  const [isShuffle, setIsShuffle] = useState(false)
+  const [isPlay, setIsPlay] = useState(false)
+  const [playNext, setPlayNext] = useState(false)
+
+  const [audio] = useState(new Audio())
+  const { isOpenPlayer } = useOpenPlayer()
+  useEffect(() => {
+    if (playNext === true) {
+      audio.src = nextMusic.url
+    } else {
+      audio.src = music.url
+    }
+    if (isPlay && isOpenPlayer) {
+      audio.play()
+    }
+  }, [music, audio, isPlay, isOpenPlayer, nextMusic, playNext])
+
+  useEffect(() => {
+    const handleEnded = () => {
+      // Reset the currentTime to 0 to loop the audio
+      if (isRepeat === true) {
+        audio.currentTime = 0
+        audio.play()
+      }
+    }
+
+    audio.addEventListener('ended', handleEnded)
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded)
+    }
+  }, [isRepeat, music, audio])
+
+  function handleRepeat() {
+    setIsRepeat((isRepeat) => !isRepeat)
+  }
+
+  function handleShuffle() {
+    setIsShuffle((isShuffle) => !isShuffle)
+  }
+
+  function handlePlay() {
+    setIsPlay((play) => !play)
+  }
+  function handelPlayNext() {
+    setPlayNext(true)
+    showNextObject()
+  }
+
+  useEffect(() => {
+    return () => {
+      // Cleanup function to pause audio when component unmounts
+      audio.pause()
+    }
+  }, [audio])
+  return (
+    <ModalContent>
+      <>
+        <ModalHeader className='bg-gray-700 w-[100%] h-[95vh] sm:h-[90vh] flex justify-center items-center flex-col gap-1'>
+          {!playNext ? (
+            <>
+              <div className='z-10 overflow-hidden absolute bottom-[0] w-[100%] h-[95%] rounded-t-[1.5rem] bg-gray-700/90'>
+                <div className='w-[100%] h[100%] flex justify-center flex-col'>
+                  <div className='flex-col flex items-center justify-center'>
+                    <img
+                      className='w-[90%] h-[25rem] sm:h-[33rem] rounded-[1rem]'
+                      src={music.coverArt}
+                      alt=''
+                    />
+                    <div className='w-[85%] mt-[1rem] sm:mt-[.9rem]'>
+                      <h1 className='text-[2rem] text-white1 mt-[1.5rem]'>
+                        {music.title}
+                      </h1>
+                      <h3 className='text-gray300 mt-[1rem] font-normal'>
+                        {music.artist}
+                      </h3>
+                      <div className='mt-[-3rem]'>
+                        <PlayerButton music={music} />
+                      </div>
+                    </div>
+                  </div>
+                  {/* icons */}
+                  <div className='mt-[3rem] flex items-center justify-evenly'>
+                    <div onClick={handleRepeat}>
+                      {isRepeat ? (
+                        <RepeatOnce size={28} color='#f8f7f8' />
+                      ) : (
+                        <Repeat size={28} color='#f8f7f8' />
+                      )}
+                    </div>
+                    <span className='ml-[3rem]'>
+                      <SkipBack size={23} color='#f8f7f8' weight='fill' />
+                    </span>
+                    <div onClick={handlePlay}>
+                      {!isPlay ? (
+                        <PlayCircle size={78} color='#f8f7f8' weight='fill' />
+                      ) : (
+                        <PauseCircle size={78} color='#ede3ed' eight='fill' />
+                      )}
+                    </div>
+                    <div onClick={handelPlayNext} className='mr-[3rem]'>
+                      <SkipForward size={23} color='#f8f7f8' weight='fill' />
+                    </div>
+                    <div onClick={handleShuffle}>
+                      {isShuffle ? (
+                        <Shuffle size={28} color='#f8f7f8' />
+                      ) : (
+                        <ArrowsDownUp size={28} color='#f5eef5' />
+                      )}
+                    </div>
+                  </div>
+                  <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
+                    <Slider1 duration={music.duration} />
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+            <div className='z-10 overflow-hidden absolute bottom-[0] w-[100%] h-[95%] rounded-t-[1.5rem] bg-gray-700/90'>
+                <div className='w-[100%] h[100%] flex justify-center flex-col'>
+                  <div className='flex-col flex items-center justify-center'>
+                    <img
+                      className='w-[90%] h-[25rem] sm:h-[33rem] rounded-[1rem]'
+                      src={nextMusic.coverArt}
+                      alt=''
+                    />
+                    <div className='w-[85%] mt-[1rem] sm:mt-[.9rem]'>
+                      <h1 className='text-[2rem] text-white1 mt-[1.5rem]'>
+                        {nextMusic.title}
+                      </h1>
+                      <h3 className='text-gray300 mt-[1rem] font-normal'>
+                        {nextMusic.artist}
+                      </h3>
+                      <div className='mt-[-3rem]'>
+                        <PlayerButton music={nextMusic} />
+                      </div>
+                    </div>
+                  </div>
+                  {/* icons */}
+                  <div className='mt-[3rem] flex items-center justify-evenly'>
+                    <div onClick={handleRepeat}>
+                      {isRepeat ? (
+                        <RepeatOnce size={28} color='#f8f7f8' />
+                      ) : (
+                        <Repeat size={28} color='#f8f7f8' />
+                      )}
+                    </div>
+                    <span className='ml-[3rem]'>
+                      <SkipBack size={23} color='#f8f7f8' weight='fill' />
+                    </span>
+                    <div onClick={handlePlay}>
+                      {!isPlay ? (
+                        <PlayCircle size={78} color='#f8f7f8' weight='fill' />
+                      ) : (
+                        <PauseCircle size={78} color='#ede3ed' eight='fill' />
+                      )}
+                    </div>
+                    <div onClick={handelPlayNext} className='mr-[3rem]'>
+                      <SkipForward size={23} color='#f8f7f8' weight='fill' />
+                    </div>
+                    <div onClick={handleShuffle}>
+                      {isShuffle ? (
+                        <Shuffle size={28} color='#f8f7f8' />
+                      ) : (
+                        <ArrowsDownUp size={28} color='#f5eef5' />
+                      )}
+                    </div>
+                  </div>
+                  <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
+                    <Slider1 duration={nextMusic.duration} />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </ModalHeader>
+      </>
+    </ModalContent>
+  )
+}
+
+export default MusicPlayer
+
+
+
+
+
+
+
+import { useEffect } from 'react'
+import SignUp from './SignUp'
+import { useNavigate } from 'react-router-dom'
+import BottomHeader from '../components/BottomHeader'
+// import Form from "../../ui/Form";
+
+// Email regex: /\S+@\S+\.\S+/
+
+function User() {
+  const navigate = useNavigate()
+
+  const isAuthenticated = true
+
+  useEffect(
+    function () {
+      if (!isAuthenticated) {
+        navigate('/login')
+      }
+    },
+    [isAuthenticated]
+  )
+
+  return <div className='h-[85vh]  '>
+    <BottomHeader icon="user"/>
+  </div>
+}
+
+export default User

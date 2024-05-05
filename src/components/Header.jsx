@@ -56,14 +56,14 @@ const{handelCloseHeader}=useDeleteHeader()
             <p className='font-bold text-inherit'>FANA</p>
           </NavbarBrand>
           <NavbarItem>
-            <Link color='' href='#'>
-              Features
-            </Link>
+            <NavLink color='' to="/albums">
+              Albums
+            </NavLink>
           </NavbarItem>
-          <NavbarItem isActive>
-            <Link href='#' aria-current='page'>
-              Customers
-            </Link>
+          <NavbarItem >
+            <NavLink to="/playlist">
+              Playlist
+            </NavLink>
           </NavbarItem>
           {/* <NavbarItem>
             <Link color='foreground' href='#'>
@@ -74,7 +74,7 @@ const{handelCloseHeader}=useDeleteHeader()
 
         <NavbarContent justify='end'>
           <NavbarItem className='hidden lg:flex'>
-            <Link href='#'>Login</Link>
+            <NavLink to="/login">Login</NavLink>
           </NavbarItem>
           <NavbarItem>
             {/* <Button as={Link} color="warning" href="#" variant="flat">

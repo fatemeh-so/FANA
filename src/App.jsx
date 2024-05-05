@@ -32,8 +32,8 @@ function App() {
       <NextUIProvider className='dark'>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <FocusSearchProvider>
-            <OpenAlbumProvider>
+          <OpenAlbumProvider>
+            <FocusSearchProvider>
               <DeleteHeaderProvider>
                 <OpenPlayerProvider>
                   <GlobalStyles />
@@ -48,14 +48,18 @@ function App() {
                         <Route path='*' element={<PageNotFound />} />
                         <Route path='signup' element={<SignUp />} />
                         <Route path='login' element={<Login />} />
-                        <Route path='/albums/:albumId' element={<AlbumTrack/>}/>
+                        <Route
+                          path='/albums/:albumId'
+                          element={<AlbumTrack />}
+                        />
                       </Route>
                     </Routes>
                   </BrowserRouter>
                 </OpenPlayerProvider>
               </DeleteHeaderProvider>
-            </OpenAlbumProvider>
-          </FocusSearchProvider>
+            </FocusSearchProvider>{' '}
+          </OpenAlbumProvider>
+
           <Toaster
             position='top-center'
             gutter={12}

@@ -33,4 +33,32 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}  /* Style for scroll */
+::-webkit-scrollbar {
+    width: 5px; /* Adjust the width as desired */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #111827; /* Dark background color */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #111827; /* Darker color for the scroll handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #323131; /* Lighter color when hovering over the scroll handle */
+}
+
+/* Additional styling for the container */
+.scroll-container {
+    height: 300px; /* Adjust height as needed */
+    overflow-y: scroll;
+}
+
+.scroll-content {
+    padding: 20px;
 }

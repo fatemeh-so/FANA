@@ -1,34 +1,27 @@
 /* eslint-disable react/prop-types */
 import { ScrollShadow } from '@nextui-org/react'
-import { DownloadSimple, Plus, UserSound } from '@phosphor-icons/react'
+import { DownloadSimple, Plus, Trash, UserSound } from '@phosphor-icons/react'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { formatDuration } from '../../helper/formattedDuration'
-import { useState } from 'react'
-import useAddInPlaylist from '../MyPlaylist/useAddInPlaylist'
-import Spinner from '../../components/Spinner'
+import { useDeletePlaylist } from './useDelete'
 
-function HomeMusicChild({ music, index, nextMusic, prevMusic }) {
-  const { title, artist, coverArt, duration } = music
+function HomeMusicChild({ music, index }) {
+  const { id, title, artist, coverArt, duration } = music
+  const { mutate: deletePlaylist, isLoading } = useDeletePlaylist()
   const { handelPlayMusic } = useOpenPlayer()
-  const [isLike, setIsLike] = useState(false)
-
-  const { mutate: addMusic, isLoading } = useAddInPlaylist()
-  // console.log(nextMusic)
-  function handelLike() {
-    setIsLike((isLike) => !isLike)
-    if (!isLike) addMusic({ music })
+  function handelTrash(musicId) {
+    deletePlaylist(musicId)
   }
-  if (isLoading) return <Spinner />
   return (
-    <div className=''>
+    <>
       <ScrollShadow hideScrollBar className=''>
         <div
           className='flex items-center'
           onClick={() => {
-            handelPlayMusic(music, nextMusic, prevMusic)
+            handelPlayMusic(music)
           }}
         >
-          <span className='ml-2 font-thin  text-[.8rem] '>{index}</span>
+          <span className='ml-2 font-thin'>{index}</span>
           <img
             src={coverArt}
             className='w-[4rem] h-[4rem] m-2 rounded-[1rem]'
@@ -44,18 +37,18 @@ function HomeMusicChild({ music, index, nextMusic, prevMusic }) {
           <div className='ml-6 text-right text-[.8rem] text-gray300'>
             {formatDuration(duration)}
           </div>
-          <div className='ml-5 hidden md:block text-right text-[.8rem] text-gray300'>
+          <div className='ml-6 text-right text-[.8rem] text-gray300'>
             {<DownloadSimple size={20} color='#f4ecf4' />}
           </div>
-          <button
-            onClick={handelLike}
-            className=' hidden md:block ml-6 text-right text-[.8rem] text-gray300 '
+          <div
+            onClick={() => handelTrash(id)}
+            className='ml-6 text-right text-[.8rem] text-gray300'
           >
-            <Plus size={20} color='#f4ecf4' />
-          </button>
+            <Trash size={20} color='#f4ecf4' />
+          </div>
         </div>
       </ScrollShadow>
-    </div>
+    </>
   )
 }
 

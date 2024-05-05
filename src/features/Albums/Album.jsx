@@ -6,6 +6,7 @@ import AlbumTrack from './AlbumTrack'
 
 function Album({ albums }) {
   const [searchParams, setSearchParams] = useSearchParams()
+
   // const[title]
   const navigate = useNavigate()
   function handelAlbum(id) {
