@@ -1,23 +1,23 @@
 import { Modal, useDisclosure } from '@nextui-org/react'
+import MyMusicPlayer from '../features/MyPlaylist/MyMusicPlayer'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import MusicPlayer from './MusicPlayer'
 
-export default function Modal1({songValue}) {
-  const { isOpenPlayer, handelPlayMusic } = useOpenPlayer()
+export default function ModalPlaylist({ songValue }) {
+  const { handelMyPlay, isOpenPlayList, } = useOpenPlayer()
 
   const { onOpenChange } = useDisclosure()
-//  console.log(nextMusic);
+
   return (
     <div className=''>
       <Modal
-        isOpen={isOpenPlayer}
+        isOpen={isOpenPlayList}
         // placement='bottom'
         backdrop='blur'
         onOpenChange={onOpenChange}
-        onClose={handelPlayMusic}
+        onClose={handelMyPlay}
         size='2xl'
       >
-        <MusicPlayer songValue={songValue} />
+        <MyMusicPlayer songValue={songValue} />
       </Modal>
     </div>
   )

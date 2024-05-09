@@ -2,23 +2,27 @@ import { Button, Input } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
 import BottomHeader from '../components/BottomHeader'
 import { useNavigate } from 'react-router-dom'
+import { useLogin } from '../features/auth/useLogin'
+import Spinner from '../components/Spinner'
 // import BottomHeader from '../components/BottomHeader'
 function Login() {
-    const navigate=useNavigate()
+  const navigate = useNavigate()
   const { register, getValues, formState, handleSubmit, reset } = useForm()
+  const { mutate: loginTo, isLoading } = useLogin()
   const { errors } = formState
 
-  function onSubmit({ fullname, email, Password, passwordConfirm }) {
-    console.log({ fullname, email, Password, passwordConfirm })
+  function onSubmit({ email, password }) {
+    loginTo({ email, password })
   }
   function handelToLogin(e) {
     e.preventDefault()
     navigate('/signup')
   }
+  if (isLoading) return <Spinner />
   return (
     <div className='h-[100vh] flex flex-col justify-center it w[100vh]'>
       {/* <BottomHeader  /> */}
-      <BottomHeader icon="user" to="home" />
+      <BottomHeader icon='user' to='home' />
       <form
         className='flex h-[100%]  w-[100%]  justify-center  items-center mt-[-1rem] '
         onSubmit={handleSubmit(onSubmit)}

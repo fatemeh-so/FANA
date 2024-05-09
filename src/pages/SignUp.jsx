@@ -2,23 +2,28 @@ import { Button, Input } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
 import BottomHeader from '../components/BottomHeader'
 import { useNavigate } from 'react-router-dom'
+import useSignUp from '../features/auth/useSignUp'
+import Spinner from '../components/Spinner'
 // import BottomHeader from '../components/BottomHeader'
 function SignUp() {
   const { register, getValues, formState, handleSubmit, reset } = useForm()
   const { errors } = formState
-  const navigate=useNavigate()
+  const { isLoading, mutate: signUp } = useSignUp()
+  const navigate = useNavigate()
 
-  function onSubmit({ fullname, email, Password, passwordConfirm }) {
-    console.log({ fullname, email, Password, passwordConfirm })
+  function onSubmit({ fullName, email, password }) {
+    console.log(fullName, email, password);
+    signUp({ fullName, email, password })
   }
   function handelToLogin(e) {
     e.preventDefault()
     navigate('/login')
   }
+  if (isLoading) return <Spinner />
   return (
     <div className='h-[100vh] flex flex-col justify-center it w[100vh]'>
       {/* <BottomHeader  /> */}
-      <BottomHeader leftContent={false}  to="home"  />
+      <BottomHeader leftContent={false} to='home' />
       <form
         className='flex h-[100%]  w-[100%]  justify-center  items-center mt-[-1rem] '
         onSubmit={handleSubmit(onSubmit)}
@@ -30,19 +35,19 @@ function SignUp() {
           <div className=' w-full flex flex-col gap-2 max-w-[240px]'>
             <Input
               label='Full Name'
-              // placeholder='Fullname'
-              id='fullname'
-              {...register('fullname', { required: 'this field is required' })}
+              // placeholder='FullName'
+              id='fullName'
+              {...register('fullName', { required: 'this field is required' })}
             />
             <p className='text-default-500 text-small ml-[1rem] text-red-600'>
-              {errors?.fullname?.message}
+              {errors?.fullName?.message}
             </p>
           </div>
           {/* email */}
           <div className='w-full flex flex-col gap-2 max-w-[240px]'>
             <Input
               label=' Email'
-              // placeholder='Fullname'
+              // placeholder='FullName'
               id='email'
               {...register('email', {
                 required: 'this field is required',
@@ -61,7 +66,7 @@ function SignUp() {
             <Input
               type='password'
               label=' Password'
-              // placeholder='Fullname'
+              // placeholder='FullName'
               id='password'
               {...register('password', {
                 required: 'this field is required',
@@ -80,7 +85,7 @@ function SignUp() {
             <Input
               type='password'
               label=' Repeat Password'
-              // placeholder='Fullname'
+              // placeholder='FullName'
               id='passwordConfirm'
               {...register('passwordConfirm', {
                 required: 'this field is required',

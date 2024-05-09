@@ -9,14 +9,18 @@ import AppLayout from './components/AppLayout'
 import MyPlaylist from './pages/MyPlaylist'
 import PageNotFound from './pages/PageNotFound'
 import Albums from './pages/Albums'
-import User from './pages/user'
-import { DeleteHeaderProvider } from './contexts/deleteHeaderContext'
+// import { DeleteHeaderProvider } from './contexts/deleteHeaderContext'
 import { OpenPlayerProvider } from './contexts/openPlayerContext'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import { OpenAlbumProvider } from './contexts/openAlbumContext'
 import { FocusSearchProvider } from './contexts/FocusSearchContext'
 import AlbumTrack from './features/Albums/AlbumTrack'
+import { MusicPLayerProvider } from './contexts/musicPLayerContext'
+import Artist from './pages/Artist'
+import ArtistPage from './features/artist/ArtistPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import { MyMusicPLayerProvider } from './contexts/MyMusicPLayerContext '
 // import SignUp from './features/user/SignUp'
 function App() {
   const queryClient = new QueryClient({
@@ -32,33 +36,49 @@ function App() {
       <NextUIProvider className='dark'>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <OpenAlbumProvider>
-            <FocusSearchProvider>
-              <DeleteHeaderProvider>
-                <OpenPlayerProvider>
-                  <GlobalStyles />
-                  <BrowserRouter>
-                    <Routes>
-                      <Route element={<AppLayout />}>
-                        <Route index element={<Navigate replace to='home' />} />
-                        <Route path='home' element={<Home />} />
-                        <Route path='albums' element={<Albums />} />
-                        <Route path='Playlist' element={<MyPlaylist />} />
-                        <Route path='user' element={<User />} />
-                        <Route path='*' element={<PageNotFound />} />
-                        <Route path='signup' element={<SignUp />} />
-                        <Route path='login' element={<Login />} />
-                        <Route
-                          path='/albums/:albumId'
-                          element={<AlbumTrack />}
-                        />
-                      </Route>
-                    </Routes>
-                  </BrowserRouter>
-                </OpenPlayerProvider>
-              </DeleteHeaderProvider>
-            </FocusSearchProvider>{' '}
-          </OpenAlbumProvider>
+          <OpenPlayerProvider>
+            <MyMusicPLayerProvider>
+              <OpenAlbumProvider>
+                <FocusSearchProvider>
+                  <MusicPLayerProvider>
+                    <GlobalStyles />
+                    <BrowserRouter>
+                      <Routes>
+                        <Route element={<AppLayout />}>
+                          <Route
+                            index
+                            element={<Navigate replace to='home' />}
+                          />
+                          <Route path='home' element={<Home />} />
+                          <Route path='albums' element={<Albums />} />
+                          <Route
+                            path='Playlist'
+                            element={
+                              <ProtectedRoute>
+                                <MyPlaylist />
+                              </ProtectedRoute>
+                            }
+                          />
+                          <Route path='artist' element={<Artist />} />
+                          <Route path='*' element={<PageNotFound />} />
+                          <Route path='signup' element={<SignUp />} />
+                          <Route path='login' element={<Login />} />
+                          <Route
+                            path='/albums/:albumId'
+                            element={<AlbumTrack />}
+                          />
+                          <Route
+                            path='/artist/:artistId'
+                            element={<ArtistPage />}
+                          />
+                        </Route>
+                      </Routes>
+                    </BrowserRouter>{' '}
+                  </MusicPLayerProvider>
+                </FocusSearchProvider>
+              </OpenAlbumProvider>
+            </MyMusicPLayerProvider>{' '}
+          </OpenPlayerProvider>
 
           <Toaster
             position='top-center'

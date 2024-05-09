@@ -1,13 +1,11 @@
-import { ScrollShadow, User } from '@nextui-org/react'
-import { Heart, Play, UserSound } from '@phosphor-icons/react'
+import { ScrollShadow } from '@nextui-org/react'
 import HomeMusicChild from './HomeMusicChild'
 import useMusic from './useMusic'
 import Spinner from '../../components/Spinner'
 import { useSearchParams } from 'react-router-dom'
 import Filter from '../../components/Filter'
-import HomeBar from './HomeBar'
-import { useState } from 'react'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
+import { useEffect } from 'react'
 
 // import { Play } from '@phosphor-icons/react'
 
@@ -15,8 +13,8 @@ function HomeMusic() {
   const { data: music, isLoading } = useMusic()
   const [searchParams] = useSearchParams()
   const filter = searchParams.get('genre')
-  const {currentIndex} = useOpenPlayer()
-console.log(currentIndex);
+  const { handelFilterMusic } = useOpenPlayer()
+
   let filteredMusic = []
 
   if (filter === 'all') {
@@ -51,12 +49,14 @@ console.log(currentIndex);
   }
   // console.log(filteredMusic);
 
+  // handelFilterMusic(filteredMusic)
+
   if (isLoading) {
     return <Spinner />
   }
 
   return (
-    <div className='overflow-y-hidden  w-full'>
+    <div onClick={()=> handelFilterMusic(filteredMusic)} className='overflow-y-hidden  w-full'>
       <ScrollShadow
         hideScrollBar
         offset={10}
@@ -70,7 +70,6 @@ console.log(currentIndex);
               <HomeMusicChild
                 key={filteredMusicItem.id}
                 music={filteredMusicItem}
-                nextMusic={filteredMusic[index + currentIndex]} // Pass the next music item as a prop
                 index={index + 1}
               />
             ))}

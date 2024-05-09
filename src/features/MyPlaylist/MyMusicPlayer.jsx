@@ -10,19 +10,19 @@ import {
   SkipForward,
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
-import Slider1 from './Slider'
-import PlayerButton from './PlayerButton'
-import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { usePlayer } from '../contexts/musicPLayerContext'
-function MusicPlayer({songValue}) {
-  const { music } = useOpenPlayer()
+import Slider1 from '../../components/Slider'
+import PlayerButton from '../../components/PlayerButton'
+import { useOpenPlayer } from '../../contexts/openPlayerContext'
+import { useMyPlayer } from '../../contexts/MyMusicPLayerContext '
+function MyMusicPlayer({songValue}) {
+  const { myMusic:music } = useOpenPlayer()
 const{ isRepeat,
   isShuffle,
   isPlay,
   handleRepeat,
   handleShuffle,
   handlePlay,
-  handelPlayNext,}=usePlayer()
+  handelPlayNext,}=useMyPlayer()
 
 
   return (
@@ -90,4 +90,4 @@ const{ isRepeat,
   )
 }
 
-export default MusicPlayer
+export default MyMusicPlayer

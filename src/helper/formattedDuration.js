@@ -12,3 +12,9 @@ export const formatDuration = (duration) => {
   // Format the result
   return `${mins < 10 ? '0' + mins : mins}:${secs < 10 ? '0' : ''}${secs}`
 }
+export const formatToSecs = (duration) => {
+  const [hours, minutes, seconds] = duration.split(':').map(Number)
+
+  const totalSeconds = hours * 3600 + minutes * 60 + seconds
+  return totalSeconds
+}

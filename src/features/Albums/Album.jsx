@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import BottomHeader from '../../components/BottomHeader'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useOpenAlbum } from '../../contexts/openAlbumContext'
 import AlbumTrack from './AlbumTrack'
@@ -13,12 +12,10 @@ function Album({ albums }) {
     navigate(`/albums/${id}`)
   }
   const { isOpenAlbum, handelOpenAlbum } = useOpenAlbum()
-  if(isOpenAlbum)
-  return <AlbumTrack />
+  // if (isOpenAlbum) return <AlbumTrack />
   return (
     <>
       <div>
-        {/* <BottomHeader to='home' /> */}
         <h1 className='my-4 text-[2rem] '>Library</h1>
 
         <div className=' grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4'>
@@ -27,8 +24,8 @@ function Album({ albums }) {
               <img
                 src={albums.coverArt}
                 onClick={() => {
-                  handelOpenAlbum()
-                  handelAlbum(albums.id,albums.title)
+                  // handelOpenAlbum()
+                  handelAlbum(albums.id, albums.title)
                 }}
                 alt={albums.title}
                 className='w-full h-full object-cover rounded-[2rem] '
@@ -41,9 +38,6 @@ function Album({ albums }) {
             </div>
           ))}
         </div>
-
-        {/* when click on album then AlbumTrack will open */}
-        {/* {isOpenAlbum&&<AlbumTrack/>} */}
       </div>
     </>
   )

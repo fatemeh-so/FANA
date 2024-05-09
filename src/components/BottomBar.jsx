@@ -49,15 +49,15 @@ function BottomBar() {
               />
             </NavLink>
           </li>
-          <li onClick={() => handleNavLinkClick('/user')}>
+          <li onClick={() => handleNavLinkClick('/artist')}>
             <NavLink
-              to='/user'
+              to='/artist'
               className='flex flex-col items-center justify-center'
             >
               <User
                 size={25}
-                color={activeNavLink === '/user' ? '#fcfcff' : '#dedede'}
-                weight={activeNavLink === '/user' ? 'fill' : 'bold'}
+                color={activeNavLink === '/artist' ? '#fcfcff' : '#dedede'}
+                weight={activeNavLink === '/artist' ? 'fill' : 'bold'}
               />
             </NavLink>
           </li>

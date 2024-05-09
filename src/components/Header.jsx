@@ -12,15 +12,23 @@ import {
   Input,
 } from '@nextui-org/react'
 // import { Input } from "postcss";
-import { MagnifyingGlass } from '@phosphor-icons/react'
+import { MagnifyingGlass, SignOut } from '@phosphor-icons/react'
 import { NavLink } from 'react-router-dom'
-import { useDeleteHeader } from '../contexts/deleteHeaderContext'
+// import { useDeleteHeader } from '../contexts/deleteHeaderContext'
 import SearchInput from './SearchInput'
+import { useUser } from '../features/auth/useUser'
+import Spinner from './Spinner'
+import useLogout from '../features/auth/useLogout'
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-const{handelCloseHeader}=useDeleteHeader()
+  const { isAuthenticated, isLoading } = useUser()
+  const { mutate: logout, isLoading:isLogout } = useLogout()
+  function handelLogout() {
+    logout()
+  }
+  // const{handelCloseHeader}=useDeleteHeader()
   // const menuItems = [
   //   // 'Profile',
   //   // 'Dashboard',
@@ -36,7 +44,7 @@ const{handelCloseHeader}=useDeleteHeader()
   //   'Playlist',
   //   'Sign Up',
   // ]
-
+  if (isLoading||isLogout) return <Spinner />
   return (
     <div className='  h-[3vh] w-[100%]'>
       <Navbar
@@ -56,14 +64,12 @@ const{handelCloseHeader}=useDeleteHeader()
             <p className='font-bold text-inherit'>FANA</p>
           </NavbarBrand>
           <NavbarItem>
-            <NavLink color='' to="/albums">
+            <NavLink color='' to='/albums'>
               Albums
             </NavLink>
           </NavbarItem>
-          <NavbarItem >
-            <NavLink to="/playlist">
-              Playlist
-            </NavLink>
+          <NavbarItem>
+            <NavLink to='/playlist'>Playlist</NavLink>
           </NavbarItem>
           {/* <NavbarItem>
             <Link color='foreground' href='#'>
@@ -73,35 +79,42 @@ const{handelCloseHeader}=useDeleteHeader()
         </NavbarContent>
 
         <NavbarContent justify='end'>
-          <NavbarItem className='hidden lg:flex'>
-            <NavLink to="/login">Login</NavLink>
-          </NavbarItem>
+          {isAuthenticated ? (
+            <NavbarItem onClick={handelLogout} className='hidden lg:flex'>
+              <NavLink><div className='flex gap-2'><SignOut size={25} color="#f4ecf4" /> <p>  Logout</p></div></NavLink>
+            </NavbarItem>
+          ) : (
+            <NavbarItem className='hidden lg:flex'>
+              <NavLink to='/login'>Login</NavLink>
+            </NavbarItem>
+          )}
           <NavbarItem>
             {/* <Button as={Link} color="warning" href="#" variant="flat">
             Sign Up
           </Button> */}
-      <SearchInput/>
+            <SearchInput />
           </NavbarItem>
         </NavbarContent>
-<div className='h-[10%]'>
-        <NavbarMenu  >
-          {/* {menuItems.map((item, index) => ( */}
-          <NavbarMenuItem className='h-[50vh]'  >
-            <Link    className='w-full' color={'foreground'} href='' size='lg'>
-              <NavLink to='/home'>Home</NavLink>
-            </Link>
-            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
-              <NavLink to='/albums'>Albums</NavLink>
-            </Link>
-            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
-              <NavLink to='/playlist'>Playlist</NavLink>
-            </Link>
-            <Link onClick={()=>handelCloseHeader(false)} className='w-full' color={''} href='' size='lg'>
-              <NavLink to='/signup'>Sign Up</NavLink>
-            </Link>
-          </NavbarMenuItem>
-          {/* ))} */}
-        </NavbarMenu></div>
+        <div className='h-[10%]'>
+          <NavbarMenu>
+            {/* {menuItems.map((item, index) => ( */}
+            <NavbarMenuItem className='h-[50vh]'>
+              <Link className='w-full' color={'foreground'} href='' size='lg'>
+                <NavLink to='/home'>Home</NavLink>
+              </Link>
+              <Link className='w-full' color={''} href='' size='lg'>
+                <NavLink to='/albums'>Albums</NavLink>
+              </Link>
+              <Link className='w-full' color={''} href='' size='lg'>
+                <NavLink to='/playlist'>Playlist</NavLink>
+              </Link>
+              <Link className='w-full' color={''} href='' size='lg'>
+                <NavLink to='/signup'>Sign Up</NavLink>
+              </Link>
+            </NavbarMenuItem>
+            {/* ))} */}
+          </NavbarMenu>
+        </div>
       </Navbar>
     </div>
   )

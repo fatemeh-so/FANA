@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import { useSearchFocus } from '../contexts/FocusSearchContext'
 import HomeMusicChild from '../features/home/HomeMusicChild'
-import { useDeleteHeader } from '../contexts/deleteHeaderContext'
+// import { useDeleteHeader } from '../contexts/deleteHeaderContext'
 
-function SearchResult({}) {
+function SearchResult() {
   const { setSearchFocus, searchAlbumResult, searchResults } = useSearchFocus()
 
-  const { handelCloseHeader } = useDeleteHeader()
+  // const { handelCloseHeader } = useDeleteHeader()
   const navigate = useNavigate()
   function handelAlbum(id) {
     navigate(`/albums/${id}`)
     setSearchFocus(false)
-    handelCloseHeader(false)
+    // handelCloseHeader(false)
   }
   return (
     // music

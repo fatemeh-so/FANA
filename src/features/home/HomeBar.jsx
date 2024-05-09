@@ -1,43 +1,91 @@
-import React from 'react'
-import { Card, CardFooter, Image, Button } from '@nextui-org/react'
 import Spinner from '../../components/Spinner'
 import useAlbum from '../Albums/useAlbum'
-import Album from '../Albums/Album'
 import { useNavigate } from 'react-router-dom'
-import { useOpenAlbum } from '../../contexts/openAlbumContext'
+import useSinger from '../../features/artist/useSinger'
 function HomeBar() {
-  const { data: albums, isLoading } = useAlbum()
+  const { data: album, isLoading } = useAlbum()
+  const { data: artist, isLoading: isArtist } = useSinger()
   const navigate = useNavigate()
-  function handelAlbum(id) {
+  // const [searchParams] = useSearchParams()
+  // const filter = searchParams.get('genre')
+
+  // console.log(filteredMusic)
+
+  function handleAlbum(id, title) {
     navigate(`/albums/${id}`)
   }
-  const { isOpenAlbum, handelOpenAlbum } = useOpenAlbum()
-  if (isLoading) {
+  function handleArtist(id) {
+    navigate(`/artist/${id}`)
+  }
+  function handelNavigateToArtist() {
+    navigate('/artist')
+  }
+  function handelNavigateToAlbum(id) {
+    navigate(`/albums`)
+  }
+  // const { isOpenAlbum, handleOpenAlbum } = useOpenAlbum()
+
+  if (isLoading || isArtist) {
     return <Spinner />
   }
+
   return (
-    <div>
-      {' '}
-      <h1 className='mt-[2rem] ml-[2rem] text-[1.5rem]'>Hot Albums </h1>
-      <div className='  w-[100vh] overflow-y-hidden  mt-[1rem] ml-[2rem] grid grid-cols-2 gap-4 md:grid-cols-1 xl:grid-cols-4'>
-        {albums?.map((albums, index) => (
-          <div key={index} className='relative '>
+    <div className='flex flex-col  w-[100vh] overflow-x-hidden'>
+      <h1 className='mt-[2rem] ml-[2rem] text-[1.5rem]'>Hot music </h1>
+      <div className='flex overflow-x-auto mt-[1rem] ml-[2rem] space-x-4'>
+        {album?.map((album, index) => (
+          <div key={index} className='relative flex-shrink-0'>
             <img
-              src={albums.coverArt}
+              src={album.coverArt}
               onClick={() => {
-                handelOpenAlbum()
-                handelAlbum(albums.id, albums.title)
+                // handleOpenAlbum()
+                handleAlbum(album.id, album.title)
               }}
-              alt={albums.title}
-              className='w-full h-full object-cover rounded-[.5rem] '
+              alt={album.title}
+              className='w-[14rem] h-[15rem] object-cover rounded-[.5rem]'
             />
-            <div className='absolute rounded-b-[2rem] bottom-0 left-0 w-full bg-black bg-opacity-30 text-white p-2'>
-              <p className=' pl-2 text-sm md:text-lg xl:text-xl font-semibold '>
-                {albums.title}
+            <div className=' absolute rounded-b-[.5rem] bottom-0 left-0 w-full h-[2rem] bg-black bg-opacity-30 text-white p-'>
+              <p className='pl-2 text-sm md:text-lg xl:text-xl font-semibold'>
+                {album.title}
               </p>
             </div>
           </div>
         ))}
+        <button
+          onClick={() => handelNavigateToAlbum(1)}
+          className='absolute rounded-l-[1rem]  right-[5.3%] text-center w-[1.5rem] h-[15rem] bg-black/50'
+        >
+          {' '}
+          &gt;
+        </button>
+      </div>{' '}
+      <h1 className='mt-[2rem] ml-[2rem] text-[1.5rem]'>Artist </h1>
+      <div className='flex  mt-[1rem] ml-[2rem] space-x-4'>
+        {artist?.map((artist, index) => (
+          <div key={index} className='relative flex-shrink-0'>
+            <img
+              src={artist.image}
+              onClick={() => {
+                // handleOpenAlbum()
+                handleArtist(artist.id)
+              }}
+              alt={artist.nickName}
+              className='w-[9rem] h-[10rem] object-cover rounded-[.5rem]'
+            />
+            <div className='absolute rounded-b-[.5rem] bottom-0 left-0 w-full h-[2rem] bg-black bg-opacity-30 text-white p-2'>
+              <p className='pl-2 text-sm md:text-lg xl:text-sm font-semibold'>
+                {artist.nickName}
+              </p>
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={handelNavigateToArtist}
+          className='absolute rounded-l-[1rem] right-[5.3%] text-center w-[1.5rem] h-[10rem] bg-black/50'
+        >
+          {' '}
+          &gt;
+        </button>
       </div>
     </div>
   )

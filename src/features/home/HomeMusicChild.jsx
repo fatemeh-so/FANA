@@ -6,18 +6,19 @@ import { formatDuration } from '../../helper/formattedDuration'
 import { useState } from 'react'
 import useAddInPlaylist from '../MyPlaylist/useAddInPlaylist'
 import Spinner from '../../components/Spinner'
+import { useEffect } from 'react'
 
-function HomeMusicChild({ music, index, nextMusic, prevMusic }) {
+function HomeMusicChild({ music, index}) {
   const { title, artist, coverArt, duration } = music
   const { handelPlayMusic } = useOpenPlayer()
   const [isLike, setIsLike] = useState(false)
-
+  
   const { mutate: addMusic, isLoading } = useAddInPlaylist()
-  // console.log(nextMusic)
   function handelLike() {
     setIsLike((isLike) => !isLike)
     if (!isLike) addMusic({ music })
   }
+
   if (isLoading) return <Spinner />
   return (
     <div className=''>
@@ -25,7 +26,7 @@ function HomeMusicChild({ music, index, nextMusic, prevMusic }) {
         <div
           className='flex items-center'
           onClick={() => {
-            handelPlayMusic(music, nextMusic, prevMusic)
+            handelPlayMusic(music, index)
           }}
         >
           <span className='ml-2 font-thin  text-[.8rem] '>{index}</span>
