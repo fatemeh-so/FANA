@@ -4,32 +4,52 @@ const OpenPlayerContext = createContext()
 function OpenPlayerProvider({ children }) {
   const [isOpenPlayer, setIsOpenPlayer] = useState(false)
   const [isOpenPlayList, setIsOpenPlayList] = useState(false)
+  const [isOpenAlbumMusic, setIsOpenAlbumMusic] = useState(false)
+  const [isOpenArtistMusic, setIsOpenArtistMusic] = useState(false)
 
   const [music, setMusic] = useState(null)
   const [myMusic, setMyMusic] = useState(null)
+  const [albumMusic, setAlbumMusic] = useState(null)
+  const [ArtistMusic, setArtistMusic] = useState(null)
 
-  const [filterMusic,setFilterMusic]=useState()
-const[musicOfPlaylist,setMusicOfPlaylist]=useState()
+  const [filterMusic, setFilterMusic] = useState()
+  const [musicOfPlaylist, setMusicOfPlaylist] = useState()
+  const [musicOfAlbum, setMusicOfAlbum] = useState()
+  const [musicOfArtist, setMusicOfArtist] = useState()
 
-
-
-
-  function handelPlayMusic(music,index) {
+  function handelPlayMusic(music, index) {
     setIsOpenPlayer((isOpenPlayer) => !isOpenPlayer)
     setMusic(music)
   }
 
-  function handelMyPlay(music,index) {
+  function handelMyPlay(music, index) {
     setIsOpenPlayList((isOpen) => !isOpen)
     setMyMusic(music)
     // console.log(isOpenPlayList);
   }
+  function handelAlbumMusic(music, index) {
+    setIsOpenAlbumMusic((isOpenPlayer) => !isOpenPlayer)
+    setAlbumMusic(music)
+  }
+  function handelArtistMusic(music, index) {
+    setIsOpenArtistMusic((isOpenPlayer) => !isOpenPlayer)
+    setArtistMusic(music)
+  }
+
   function handelFilterMusic(filterMusic) {
     setFilterMusic(filterMusic)
     // console.log(filterMusic);
   }
   function handelMusicOfPlaylist(filterMusic) {
     setMusicOfPlaylist(filterMusic)
+    // console.log(filterMusic);
+  }
+  function handelMusicOfAlbum(filterMusic) {
+    setMusicOfAlbum(filterMusic)
+    // console.log(filterMusic);
+  }
+  function handelMusicOfArtist(filterMusic) {
+    setMusicOfArtist(filterMusic)
     // console.log(filterMusic);
   }
   return (
@@ -45,7 +65,17 @@ const[musicOfPlaylist,setMusicOfPlaylist]=useState()
         myMusic,
         filterMusic,
         musicOfPlaylist,
-        handelMusicOfPlaylist
+        handelMusicOfPlaylist,
+        albumMusic,
+        isOpenAlbumMusic,
+        handelAlbumMusic,
+        handelMusicOfAlbum,
+        musicOfAlbum,
+        handelMusicOfArtist,
+        musicOfArtist,
+        ArtistMusic,
+        isOpenArtistMusic,
+        handelArtistMusic
       }}
     >
       {children}

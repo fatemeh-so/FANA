@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { useOpenPlayer } from './openPlayerContext'
-
-const MyMusicPlayerContext = createContext()
-function MyMusicPLayerProvider({ children }) {
+const AlbumMusicContext = createContext()
+function AlbumMusicProvider({ children }) {
   const {
-    myMusic: music,
-    isOpenPlayer,
-    musicOfPlaylist: filterMusic,
+    albumMusic: music,
+    isOpenAlbumMusic,
+    musicOfAlbum: filterMusic,
   } = useOpenPlayer()
   // const { data: allMusic, isLoading } = useMusic()
   const [isRepeat, setIsRepeat] = useState(false)
@@ -26,6 +25,7 @@ function MyMusicPLayerProvider({ children }) {
   const [skip, setSkip] = useState(currentMusic)
   const [prev, setPrev] = useState(currentMusic)
 
+  // console.log(filterMusic);
   useEffect(
     function play() {
       if (music && audioRef) {
@@ -49,8 +49,9 @@ function MyMusicPLayerProvider({ children }) {
   )
   useEffect(() => {
     setPlayNext(false)
+    setPlayPrev(false)
     // console.log('change')
-  }, [isOpenPlayer])
+  }, [isOpenAlbumMusic])
 
   useEffect(() => {
     if (playNext) {
@@ -60,7 +61,14 @@ function MyMusicPLayerProvider({ children }) {
       audioRef.current.play()
     }
   }, [filterMusic, playNext, valueTime, skip])
-
+  useEffect(() => {
+    if (playPrev) {
+      audioRef.current.src = filterMusic[prev].url
+      setMusicUi(filterMusic[prev])
+      audioRef.current.currentTime = valueTime
+      audioRef.current.play()
+    }
+  }, [filterMusic, playPrev, valueTime, prev])
   function handleRepeat() {
     setIsRepeat((isRepeat) => !isRepeat)
   }
@@ -87,16 +95,8 @@ function MyMusicPLayerProvider({ children }) {
       setPrev(allMusiclength)
     }
   }
-  useEffect(() => {
-    if (playPrev) {
-      audioRef.current.src = filterMusic[prev].url
-      setMusicUi(filterMusic[prev])
-      audioRef.current.currentTime = valueTime
-      audioRef.current.play()
-    }
-  }, [filterMusic, playPrev, valueTime, prev])
   return (
-    <MyMusicPlayerContext.Provider
+    <AlbumMusicContext.Provider
       value={{
         isRepeat,
         isShuffle,
@@ -106,24 +106,24 @@ function MyMusicPLayerProvider({ children }) {
         handleShuffle,
         handlePlay,
         handelPlayNext,
+        handelPlayPrev,
         audioRef,
         audioSrc,
         valueTime,
         setValueTime,
         musicUi,
-        handelPlayPrev,
       }}
     >
       {children}
-    </MyMusicPlayerContext.Provider>
+    </AlbumMusicContext.Provider>
   )
 }
-function useMyPlayer() {
-  const context = useContext(MyMusicPlayerContext)
+function useAlbumPlayer() {
+  const context = useContext(AlbumMusicContext)
 
   if (context === undefined)
     throw new Error('OpenAlbumContext was used outside of DarkModeProvider')
   return context
 }
 
-export { MyMusicPLayerProvider, useMyPlayer }
+export { AlbumMusicProvider, useAlbumPlayer }

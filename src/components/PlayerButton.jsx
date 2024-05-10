@@ -4,7 +4,7 @@ import { useState } from 'react'
 import useAddInPlaylist from '../features/MyPlaylist/useAddInPlaylist'
 
 import Spinner from '../components/Spinner'
-function PlayerButton({ music }) {
+function PlayerButton({ music=[] }) {
   const [isLike, setIsLike] = useState(false)
   const { mutate: addMusic, isLoading } = useAddInPlaylist()
  

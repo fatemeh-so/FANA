@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { useOpenPlayer } from './openPlayerContext'
+import {  useOpenPlayer } from './openPlayerContext'
 
-const MyMusicPlayerContext = createContext()
-function MyMusicPLayerProvider({ children }) {
+const ArtistPlayerContext = createContext()
+function ArtistPlayerProvider({ children }) {
   const {
-    myMusic: music,
-    isOpenPlayer,
-    musicOfPlaylist: filterMusic,
+    ArtistMusic: music,
+    isOpenArtistMusic,
+    musicOfArtist: filterMusic,
   } = useOpenPlayer()
   // const { data: allMusic, isLoading } = useMusic()
   const [isRepeat, setIsRepeat] = useState(false)
@@ -50,7 +50,7 @@ function MyMusicPLayerProvider({ children }) {
   useEffect(() => {
     setPlayNext(false)
     // console.log('change')
-  }, [isOpenPlayer])
+  }, [isOpenArtistMusic])
 
   useEffect(() => {
     if (playNext) {
@@ -71,7 +71,7 @@ function MyMusicPLayerProvider({ children }) {
 
   function handlePlay() {
     setIsPlay((play) => !play)
-    console.log(playNext)
+    // console.log(playNext)
   }
   function handelPlayNext() {
     setPlayNext(true)
@@ -96,7 +96,7 @@ function MyMusicPLayerProvider({ children }) {
     }
   }, [filterMusic, playPrev, valueTime, prev])
   return (
-    <MyMusicPlayerContext.Provider
+    <ArtistPlayerContext.Provider
       value={{
         isRepeat,
         isShuffle,
@@ -115,15 +115,15 @@ function MyMusicPLayerProvider({ children }) {
       }}
     >
       {children}
-    </MyMusicPlayerContext.Provider>
+    </ArtistPlayerContext.Provider>
   )
 }
-function useMyPlayer() {
-  const context = useContext(MyMusicPlayerContext)
+function useArtistPlayer() {
+  const context = useContext(ArtistPlayerContext)
 
   if (context === undefined)
     throw new Error('OpenAlbumContext was used outside of DarkModeProvider')
   return context
 }
 
-export { MyMusicPLayerProvider, useMyPlayer }
+export { ArtistPlayerProvider, useArtistPlayer }

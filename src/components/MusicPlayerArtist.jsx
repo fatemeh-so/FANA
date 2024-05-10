@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import {
   ArrowsDownUp,
   PauseCircle,
@@ -13,9 +12,9 @@ import { ModalContent, ModalHeader } from '@nextui-org/react'
 import Slider1 from './Slider'
 import PlayerButton from './PlayerButton'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { usePlayer } from '../contexts/musicPLayerContext'
-function MusicPlayer({ songValue }) {
-  const { music } = useOpenPlayer()
+import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
+function MusicPlayerArtist({ songValue }) {
+  const { ArtistMusic: music } = useOpenPlayer()
   const {
     isRepeat,
     isShuffle,
@@ -23,12 +22,12 @@ function MusicPlayer({ songValue }) {
     handleRepeat,
     handleShuffle,
     handlePlay,
-    handelPlayNext,
     handelPlayPrev,
+    handelPlayNext,
     playNext,
     playPrev,
     musicUi,
-  } = usePlayer()
+  } = useArtistPlayer()
   let musicTrack
   // const musicTrack = playNext ? musicUi : music
   if (playPrev || playNext) {
@@ -36,7 +35,6 @@ function MusicPlayer({ songValue }) {
   } else {
     musicTrack = music
   }
-  // console.log(musicTrack?.duration)
   return (
     <ModalContent>
       <>
@@ -102,4 +100,4 @@ function MusicPlayer({ songValue }) {
   )
 }
 
-export default MusicPlayer
+export default MusicPlayerArtist

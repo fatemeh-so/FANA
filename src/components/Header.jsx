@@ -7,27 +7,17 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
-  Link,
-  Button,
-  Input,
+  Link
 } from '@nextui-org/react'
 // import { Input } from "postcss";
-import { MagnifyingGlass, SignOut } from '@phosphor-icons/react'
 import { NavLink } from 'react-router-dom'
 // import { useDeleteHeader } from '../contexts/deleteHeaderContext'
 import SearchInput from './SearchInput'
-import { useUser } from '../features/auth/useUser'
-import Spinner from './Spinner'
-import useLogout from '../features/auth/useLogout'
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const { isAuthenticated, isLoading } = useUser()
-  const { mutate: logout, isLoading:isLogout } = useLogout()
-  function handelLogout() {
-    logout()
-  }
+ 
   // const{handelCloseHeader}=useDeleteHeader()
   // const menuItems = [
   //   // 'Profile',
@@ -44,7 +34,6 @@ export default function Header() {
   //   'Playlist',
   //   'Sign Up',
   // ]
-  if (isLoading||isLogout) return <Spinner />
   return (
     <div className='  h-[3vh] w-[100%]'>
       <Navbar
@@ -71,6 +60,9 @@ export default function Header() {
           <NavbarItem>
             <NavLink to='/playlist'>Playlist</NavLink>
           </NavbarItem>
+          <NavbarItem>
+            <NavLink to='/artist'>Artist</NavLink>
+          </NavbarItem>
           {/* <NavbarItem>
             <Link color='foreground' href='#'>
               Integrations
@@ -79,15 +71,7 @@ export default function Header() {
         </NavbarContent>
 
         <NavbarContent justify='end'>
-          {isAuthenticated ? (
-            <NavbarItem onClick={handelLogout} className='hidden lg:flex'>
-              <NavLink><div className='flex gap-2'><SignOut size={25} color="#f4ecf4" /> <p>  Logout</p></div></NavLink>
-            </NavbarItem>
-          ) : (
-            <NavbarItem className='hidden lg:flex'>
-              <NavLink to='/login'>Login</NavLink>
-            </NavbarItem>
-          )}
+     
           <NavbarItem>
             {/* <Button as={Link} color="warning" href="#" variant="flat">
             Sign Up
@@ -109,7 +93,7 @@ export default function Header() {
                 <NavLink to='/playlist'>Playlist</NavLink>
               </Link>
               <Link className='w-full' color={''} href='' size='lg'>
-                <NavLink to='/signup'>Sign Up</NavLink>
+                <NavLink to='/artist'>Artist</NavLink>
               </Link>
             </NavbarMenuItem>
             {/* ))} */}

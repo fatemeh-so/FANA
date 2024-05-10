@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { useOpenPlayer } from './openPlayerContext'
-import useMusic from '../features/home/useMusic'
-import Spinner from '../components/Spinner'
 const MusicPlayerContext = createContext()
 function MusicPLayerProvider({ children }) {
-  const { music, isOpenPlayer ,filterMusic} = useOpenPlayer()
+  const { music, isOpenPlayer, filterMusic } = useOpenPlayer()
   // const { data: allMusic, isLoading } = useMusic()
   const [isRepeat, setIsRepeat] = useState(false)
   const [isShuffle, setIsShuffle] = useState(false)
@@ -13,14 +11,17 @@ function MusicPLayerProvider({ children }) {
   const [audioSrc, setAudioSrc] = useState()
   const [valueTime, setValueTime] = useState(0)
   const [playNext, setPlayNext] = useState(false)
+  const [playPrev, setPlayPrev] = useState(false)
+
   const allMusiclength = filterMusic?.length - 2
-  const [musicUi,setMusicUi]=useState()
+  const [musicUi, setMusicUi] = useState()
   const currentMusic =
-  filterMusic?.findIndex((item) => item?.id === music?.id) || 0
+    filterMusic?.findIndex((item) => item?.id === music?.id) || 0
   const audioRef = useRef(null)
   const [skip, setSkip] = useState(currentMusic)
+  const [prev, setPrev] = useState(currentMusic)
 
-// console.log(filterMusic);
+  // console.log(filterMusic);
 
   useEffect(
     function play() {
@@ -47,7 +48,6 @@ function MusicPLayerProvider({ children }) {
     setPlayNext(false)
     // console.log('change')
   }, [isOpenPlayer])
-  
 
   useEffect(() => {
     if (playNext) {
@@ -57,7 +57,14 @@ function MusicPLayerProvider({ children }) {
       audioRef.current.play()
     }
   }, [filterMusic, playNext, valueTime, skip])
-
+  useEffect(() => {
+    if (playPrev) {
+      audioRef.current.src = filterMusic[prev].url
+      setMusicUi(filterMusic[prev])
+      audioRef.current.currentTime = valueTime
+      audioRef.current.play()
+    }
+  }, [filterMusic, playPrev, valueTime, prev])
   function handleRepeat() {
     setIsRepeat((isRepeat) => !isRepeat)
   }
@@ -77,6 +84,13 @@ function MusicPLayerProvider({ children }) {
       setSkip(0)
     }
   }
+  function handelPlayPrev() {
+    setPlayPrev(true)
+    setPrev((s) => s - 1)
+    if (prev < 1) {
+      setPrev(allMusiclength)
+    }
+  }
   return (
     <MusicPlayerContext.Provider
       value={{
@@ -92,7 +106,9 @@ function MusicPLayerProvider({ children }) {
         audioSrc,
         valueTime,
         setValueTime,
-        musicUi
+        musicUi,
+        handelPlayPrev,
+        playPrev,
       }}
     >
       {children}

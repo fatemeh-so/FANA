@@ -14,17 +14,24 @@ import Slider1 from '../../components/Slider'
 import PlayerButton from '../../components/PlayerButton'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { useMyPlayer } from '../../contexts/MyMusicPLayerContext '
-function MyMusicPlayer({songValue}) {
-  const { myMusic:music } = useOpenPlayer()
-const{ isRepeat,
-  isShuffle,
-  isPlay,
-  handleRepeat,
-  handleShuffle,
-  handlePlay,
-  handelPlayNext,}=useMyPlayer()
+function MyMusicPlayer({ songValue }) {
+  const { myMusic: music } = useOpenPlayer()
+  const {
+    isRepeat,
+    isShuffle,
+    isPlay,
+    handleRepeat,
+    handleShuffle,
+    handlePlay,
+    handelPlayNext,
+    handelPlayPrev,
+    playNext,
+    playPrev,
+    musicUi,
+  } = useMyPlayer()
 
-
+  const musicTrack = playNext || playPrev ? musicUi : music
+  console.log(musicTrack)
   return (
     <ModalContent>
       <>
@@ -34,15 +41,15 @@ const{ isRepeat,
               <div className='flex-col flex items-center justify-center'>
                 <img
                   className='w-[90%] h-[25rem] sm:h-[33rem] rounded-[1rem]'
-                  src={music.coverArt}
+                  src={musicTrack?.coverArt}
                   alt=''
                 />
                 <div className='w-[85%] mt-[1rem] sm:mt-[.9rem]'>
                   <h1 className='text-[2rem] text-white1 mt-[1.5rem]'>
-                    {music.title}
+                    {musicTrack?.title}
                   </h1>
                   <h3 className='text-gray300 mt-[1rem] font-normal'>
-                    {music.artist}
+                    {musicTrack?.artist}
                   </h3>
                   <div className='mt-[-3rem]'>
                     <PlayerButton music={music} />
@@ -58,9 +65,9 @@ const{ isRepeat,
                     <Repeat size={28} color='#f8f7f8' />
                   )}
                 </div>
-                <span className='ml-[3rem]'>
+                <div onClick={handelPlayPrev} className='ml-[3rem]'>
                   <SkipBack size={23} color='#f8f7f8' weight='fill' />
-                </span>
+                </div>
                 <div onClick={handlePlay}>
                   {!isPlay ? (
                     <PlayCircle size={78} color='#f8f7f8' weight='fill' />
@@ -80,7 +87,7 @@ const{ isRepeat,
                 </div>
               </div>
               <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
-                <Slider1 duration={music.duration} songValue={songValue} />
+                <Slider1 songValue={songValue} />
               </div>
             </div>
           </div>
