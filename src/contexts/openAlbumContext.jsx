@@ -1,9 +1,17 @@
 import { createContext, useContext, useState } from 'react'
 
 const OpenAlbumContext = createContext()
-function OpenAlbumProvider({ children }) {
-  // const [searchParams,setSearchParams]=useSearchParams()
 
+function OpenAlbumProvider({ children }) {
+  const [activeNavLink, setActiveNavLink] = useState('')
+
+  const handleNavLinkClick = (navLink,home) => {
+
+    if(home){
+      setActiveNavLink("home")
+    }
+    setActiveNavLink(navLink)
+  }
   const [isOpenAlbum, setIsOpenAlbum] = useState(false)
   // const [music, setMusic] = useState(null)
   function handelOpenAlbum() {
@@ -13,7 +21,13 @@ function OpenAlbumProvider({ children }) {
   }
   return (
     <OpenAlbumContext.Provider
-      value={{  isOpenAlbum, handelOpenAlbum, setIsOpenAlbum }}
+      value={{
+        isOpenAlbum,
+        handelOpenAlbum,
+        setIsOpenAlbum,
+        activeNavLink,
+        handleNavLinkClick,
+      }}
     >
       {children}
     </OpenAlbumContext.Provider>

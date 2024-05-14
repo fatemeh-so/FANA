@@ -2,14 +2,18 @@ import { createContext, useContext, useState } from 'react'
 import useAlbum from '../features/Albums/useAlbum'
 import Spinner from '../components/Spinner'
 import useMusic from '../features/home/useMusic'
+import useSinger from '../features/artist/useSinger'
 
 const FocusSearchContext = createContext()
 function FocusSearchProvider({ children }) {
   const { data: albums, isLoading } = useAlbum()
   const { data: music, isLoading: isMusic } = useMusic()
+  const {data:artist, isLoading:isArtist}=useSinger()
   const [searchFocus, setSearchFocus] = useState(false)
   const [searchResults, setSearchResults] = useState([])
   const [searchAlbumResult, setSearchAlbumResult] = useState([])
+  const [searchArtistResult, setSearchArtistResult] = useState([])
+
   // onChange
   const [searchValue, setSearchValue] = useState('')
 
@@ -17,7 +21,7 @@ function FocusSearchProvider({ children }) {
     const value = e.target.value
     setSearchValue(value)
     // Filtering music based on search input
-    if (isLoading || isMusic) {
+    if (isLoading || isMusic||isArtist) {
       return <Spinner />
     }
     const resultsMusic = music.filter((music) => {
@@ -34,13 +38,21 @@ function FocusSearchProvider({ children }) {
         album?.genre?.toLowerCase().includes(value?.toLowerCase())
       )
     })
-    // console.log(searchAlbumResult)
+    const resultsArtist = artist.filter((artist) => {
+      return (
+        artist?.nickName?.toLowerCase().includes(value?.toLowerCase()) 
+        // artist?.genre?.toLowerCase().includes(value?.toLowerCase())
+      )
+    })
+    // console.log(searchArtistResult)
 
     setSearchResults(resultsMusic)
     setSearchAlbumResult(resultsAlbums)
+    setSearchArtistResult(resultsArtist)
     if (!searchValue) {
       setSearchResults([])
       setSearchAlbumResult([])
+      setSearchArtistResult([])
     }
   }
   // focus
@@ -61,8 +73,8 @@ function FocusSearchProvider({ children }) {
         searchValue,
         handleSearch,
         setSearchFocus,
-        searchAlbumResult,
-        setSearchAlbumResult,
+        searchArtistResult,
+        searchAlbumResult
       }}
     >
       {children}

@@ -1,7 +1,8 @@
 import { Tabs, Tab } from '@nextui-org/react'
 import { useSearchParams } from 'react-router-dom'
 import { ScrollShadow } from '@nextui-org/react'
-export default function Filter() {
+import { memo } from 'react'
+function Filter() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const colors = ['warning']
@@ -11,7 +12,7 @@ export default function Filter() {
     // console.log(key);
   }
   return (
-    <div className='flex   flex-wrap gap-4 mt-[2rem] overflow-hidden '>
+    <div className='flex   flex-wrap gap-4  overflow-hidden '>
       {/* <ScrollShadow hideScrollBar className=''> */}
       {colors.map((color) => (
         <Tabs
@@ -37,3 +38,5 @@ export default function Filter() {
     </div>
   )
 }
+
+export default memo(Filter)

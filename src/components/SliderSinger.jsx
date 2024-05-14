@@ -1,25 +1,22 @@
 /* eslint-disable react/prop-types */
 import { Slider } from '@nextui-org/react'
 import {
-  convertSecondsToTime,
-  formatDuration,
-  formatToSecs,
+    convertSecondsToTime,
+    formatDuration,
+    formatToSecs,
 } from '../helper/formattedDuration'
 import { useEffect } from 'react'
-import { usePlayer } from '../contexts/musicPLayerContext'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
+import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
 
-export default function Slider1({ songValue = '00:00', dur }) {
+export default function SliderSinger({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
-  const { valueTime, setValueTime, playNext, playPrev, musicUi } = usePlayer()
+  const { valueTime, setValueTime, playNext, playPrev, musicUi } = useArtistPlayer()
   let musicTrack
   if (playPrev || playNext) {
     musicTrack = musicUi
   } else {
     musicTrack = music
-  }
-  if (!dur) {
-    dur = musicTrack?.duration
   }
   function handel(value) {
     setValueTime(value)
@@ -41,11 +38,7 @@ export default function Slider1({ songValue = '00:00', dur }) {
         aria-label='Temperature'
         defaultValue={0.2}
         className='max-w-m[100&]'
-        endContent={
-          <span className='text-white1'>
-            {convertSecondsToTime(formattedToSeconds)}
-          </span>
-        }
+        endContent={<span className='text-white1'>{convertSecondsToTime(formattedToSeconds-songValue)}</span>}
         startContent={
           <span className='text-white1'>{convertSecondsToTime(songValue)}</span>
         }

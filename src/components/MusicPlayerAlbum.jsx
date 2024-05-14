@@ -9,10 +9,10 @@ import {
   SkipForward,
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
-import Slider1 from './Slider'
 import PlayerButton from './PlayerButton'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { useAlbumPlayer } from '../contexts/AlbumMusicPlayerContext'
+import SliderAlbum from './SliderAlbum'
 function MusicPlayerAlbum({ songValue }) {
   const { albumMusic: music } = useOpenPlayer()
   const {
@@ -47,16 +47,16 @@ function MusicPlayerAlbum({ songValue }) {
                   src={musicTrack?.coverArt}
                   alt=''
                 />
-                <div className='w-[85%] mt-[1rem] sm:mt-[.9rem]'>
+                <div className='w-[85%] text-center mt-[1rem] sm:mt-[.9rem]'>
                   <h1 className='text-[2rem] text-white1 mt-[1.5rem]'>
                     {musicTrack?.title}
                   </h1>
                   <h3 className='text-gray300 mt-[1rem] font-normal'>
                     {musicTrack?.artist}
                   </h3>
-                  <div className='mt-[-3rem]'>
+                  {/* <div className='mt-[-3rem]'>
                     <PlayerButton music={musicTrack} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* icons */}
@@ -90,7 +90,7 @@ function MusicPlayerAlbum({ songValue }) {
                 </div>
               </div>
               <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
-                <Slider1 songValue={songValue} />
+                <SliderAlbum songValue={songValue} />
               </div>
             </div>
           </div>

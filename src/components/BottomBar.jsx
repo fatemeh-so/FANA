@@ -1,18 +1,24 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { House, MagnifyingGlass, MusicNotesSimple, User } from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
+import {
+  House,
+  MagnifyingGlass,
+  MusicNotesSimple,
+  User,
+} from '@phosphor-icons/react'
+import { useOpenAlbum } from '../contexts/openAlbumContext'
 
 function BottomBar() {
-  const [activeNavLink, setActiveNavLink] = useState(null);
-
-  const handleNavLinkClick = (navLink) => {
-    setActiveNavLink(navLink);
-  };
-
+  const { activeNavLink, handleNavLinkClick } = useOpenAlbum()
+  const { pathname } = useLocation()
+  // console.log(pathname==="/home");
+  useEffect(() => {
+    handleNavLinkClick(pathname)
+  }, [pathname, handleNavLinkClick])
   return (
-    <div className='relative'>
-      <div className='fixed rounded-[2rem] flex justify-center items-center bg-gray-700 opacity-95 p-0 w-[90%] h-[10%]'>
-        <ul className='flex gap-[4rem] text-white1'>
+    <div className='relative flex  justify-center '>
+      <div className='fixed rounded-[2rem] flex justify-center items-center bg-gray-700 opacity-90 p-0  xl:w-[26%] w-[90%] h-[10%]'>
+        <ul className='flex gap-[4rem]   text-white1'>
           <li onClick={() => handleNavLinkClick('/home')}>
             <NavLink
               to='/home'
@@ -67,4 +73,4 @@ function BottomBar() {
   )
 }
 
-export default BottomBar;
+export default BottomBar

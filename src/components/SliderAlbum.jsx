@@ -8,18 +8,17 @@ import {
 import { useEffect } from 'react'
 import { usePlayer } from '../contexts/musicPLayerContext'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
+import { useMyPlayer } from '../contexts/MyMusicPLayerContext '
+import { useAlbumPlayer } from '../contexts/AlbumMusicPlayerContext'
 
-export default function Slider1({ songValue = '00:00', dur }) {
+export default function SliderAlbum({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
-  const { valueTime, setValueTime, playNext, playPrev, musicUi } = usePlayer()
+  const { valueTime, setValueTime, playNext, playPrev, musicUi } = useAlbumPlayer()
   let musicTrack
   if (playPrev || playNext) {
     musicTrack = musicUi
   } else {
     musicTrack = music
-  }
-  if (!dur) {
-    dur = musicTrack?.duration
   }
   function handel(value) {
     setValueTime(value)
@@ -41,11 +40,7 @@ export default function Slider1({ songValue = '00:00', dur }) {
         aria-label='Temperature'
         defaultValue={0.2}
         className='max-w-m[100&]'
-        endContent={
-          <span className='text-white1'>
-            {convertSecondsToTime(formattedToSeconds)}
-          </span>
-        }
+        endContent={<span className='text-white1'>{convertSecondsToTime(formattedToSeconds-songValue)}</span>}
         startContent={
           <span className='text-white1'>{convertSecondsToTime(songValue)}</span>
         }

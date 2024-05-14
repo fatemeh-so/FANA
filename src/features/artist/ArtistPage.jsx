@@ -9,11 +9,11 @@ function ArtistPage() {
     const{data:music,isLoading}=useSingerMusic()
     const{handelMusicOfArtist}=useOpenPlayer()
     if(isLoading)return<Spinner/>
-    console.log(music);
+
   return (
     <div className='h-[85vh]' onClick={()=>handelMusicOfArtist(music)}>
       <BottomHeader />
-      <h1 className='mt-[1rem] text-[2rem] text-white1 z-10'>Artist Music</h1>
+      <h1 className='mt-[1rem] mb-[.6rem] md:text-[2rem] text-[1.8rem] text-white1 z-10'>{music[0]?.artist}</h1>
       {music.map((music) => (
           <ArtistMusicChild key={music.id} music={music} />
         ))}

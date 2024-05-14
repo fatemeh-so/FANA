@@ -9,10 +9,10 @@ function SingerIcons({ singer }) {
 
   return (
     <>
-      <div>
-        <h1 className='my-4 text-[2rem] '>Artist</h1>
-
-        <div className=' grid grid-cols-2 gap-6 lg:gap-[3rem] md:grid-cols-3 xl:grid-cols-4 py-[2rem]'>
+      {' '}
+      <h1 className='my-4 text-[2rem]  '>Artist</h1>
+      <div className='flex justify-center'>
+        <div className=' grid grid-cols-3 gap-[3rem]  lg:gap-[3rem] md:grid-cols-4 xl:grid-cols-5 py-[2rem]'>
           {singer?.map((singer, index) => (
             <div
               key={index}

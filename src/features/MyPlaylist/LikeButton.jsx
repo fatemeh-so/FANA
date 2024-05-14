@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Heart } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { useDeletePlaylist } from '../features/MyPlaylist/useDelete'
-import useAddInPlaylist from '../features/MyPlaylist/useAddInPlaylist'
-import Spinner from './Spinner'
-
-function PlayerButton({ music = [] }) {
-  const [isLike, setIsLike] = useState(false)
+import Spinner from '../../components/Spinner'
+import { useDeletePlaylist } from './useDelete'
+import useAddInPlaylist from "../../features/MyPlaylist/useAddInPlaylist"
+function LikeButton({ music = [] }) {
+  const [isLike, setIsLike] = useState(true)
   const { mutate: deletePlaylist, isLoading } = useDeletePlaylist()
   const { mutate: add, isLoading:isAdding } = useAddInPlaylist()
 
@@ -24,9 +23,9 @@ function PlayerButton({ music = [] }) {
         weight={!isLike ? 'regular' : 'fill'}
         color='#f3e7f4'
         onClick={() => handelLike(music.id)}
-      />
+      />{' '}
     </div>
   )
 }
 
-export default PlayerButton
+export default LikeButton

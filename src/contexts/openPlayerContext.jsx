@@ -2,6 +2,8 @@ import { createContext, useContext, useState } from 'react'
 
 const OpenPlayerContext = createContext()
 function OpenPlayerProvider({ children }) {
+
+  
   const [isOpenPlayer, setIsOpenPlayer] = useState(false)
   const [isOpenPlayList, setIsOpenPlayList] = useState(false)
   const [isOpenAlbumMusic, setIsOpenAlbumMusic] = useState(false)

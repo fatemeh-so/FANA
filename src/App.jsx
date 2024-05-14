@@ -34,12 +34,13 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <OpenPlayerProvider>
+          <MusicPLayerProvider>
+
             <ArtistPlayerProvider>
               <AlbumMusicProvider>
                 <MyMusicPLayerProvider>
                   <OpenAlbumProvider>
                     <FocusSearchProvider>
-                      <MusicPLayerProvider>
                         <GlobalStyles />
                         <BrowserRouter>
                           <Routes>
@@ -64,12 +65,12 @@ function App() {
                             </Route>
                           </Routes>
                         </BrowserRouter>{' '}
-                      </MusicPLayerProvider>
                     </FocusSearchProvider>
                   </OpenAlbumProvider>
                 </MyMusicPLayerProvider>
               </AlbumMusicProvider>
-            </ArtistPlayerProvider>
+            </ArtistPlayerProvider>          </MusicPLayerProvider>
+
           </OpenPlayerProvider>
 
           <Toaster
@@ -91,7 +92,7 @@ function App() {
                 color: 'var(--color-grey-700)',
               },
             }}
-          />
+            />
         </QueryClientProvider>
       </NextUIProvider>
     </>

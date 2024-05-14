@@ -10,10 +10,10 @@ import {
   SkipForward,
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
-import Slider1 from '../../components/Slider'
-import PlayerButton from '../../components/PlayerButton'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { useMyPlayer } from '../../contexts/MyMusicPLayerContext '
+import SliderMyPlaylist from '../../components/SliderMyPlaylist'
+import LikeButton from './LikeButton'
 function MyMusicPlayer({ songValue }) {
   const { myMusic: music } = useOpenPlayer()
   const {
@@ -30,8 +30,13 @@ function MyMusicPlayer({ songValue }) {
     musicUi,
   } = useMyPlayer()
 
-  const musicTrack = playNext || playPrev ? musicUi : music
-  console.log(musicTrack)
+  let musicTrack
+  // const musicTrack = playNext ? musicUi : music
+  if (playPrev || playNext) {
+    musicTrack = musicUi
+  } else {
+    musicTrack = music
+  }
   return (
     <ModalContent>
       <>
@@ -52,7 +57,7 @@ function MyMusicPlayer({ songValue }) {
                     {musicTrack?.artist}
                   </h3>
                   <div className='mt-[-3rem]'>
-                    <PlayerButton music={music} />
+                    <LikeButton music={music} />
                   </div>
                 </div>
               </div>
@@ -87,7 +92,7 @@ function MyMusicPlayer({ songValue }) {
                 </div>
               </div>
               <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
-                <Slider1 songValue={songValue} />
+                <SliderMyPlaylist songValue={songValue} />
               </div>
             </div>
           </div>

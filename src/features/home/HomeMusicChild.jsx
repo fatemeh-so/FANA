@@ -8,11 +8,11 @@ import useAddInPlaylist from '../MyPlaylist/useAddInPlaylist'
 import Spinner from '../../components/Spinner'
 import { useEffect } from 'react'
 
-function HomeMusicChild({ music, index}) {
-  const { title, artist, coverArt, duration } = music
+function HomeMusicChild({ music, index }) {
+  const { title, artist, coverArt, duration, url } = music
   const { handelPlayMusic } = useOpenPlayer()
   const [isLike, setIsLike] = useState(false)
-  
+
   const { mutate: addMusic, isLoading } = useAddInPlaylist()
   function handelLike() {
     setIsLike((isLike) => !isLike)
@@ -22,7 +22,7 @@ function HomeMusicChild({ music, index}) {
   if (isLoading) return <Spinner />
   return (
     <div className=''>
-      <ScrollShadow hideScrollBar className=''>
+      {/* <ScrollShadow hideScrollBar className=''> */}
         <div
           className='flex items-center'
           onClick={() => {
@@ -45,9 +45,11 @@ function HomeMusicChild({ music, index}) {
           <div className='ml-6 text-right text-[.8rem] text-gray300'>
             {formatDuration(duration)}
           </div>
-          <div className='ml-5 hidden md:block text-right text-[.8rem] text-gray300'>
-            {<DownloadSimple size={20} color='#f4ecf4' />}
-          </div>
+          <button className='ml-5 hidden md:block text-right text-[.8rem] text-gray300'>
+            <a href={url}>
+              {<DownloadSimple size={20} color='#f4ecf4' />}
+            </a>
+          </button>
           <button
             onClick={handelLike}
             className=' hidden md:block ml-6 text-right text-[.8rem] text-gray300 '
@@ -55,7 +57,7 @@ function HomeMusicChild({ music, index}) {
             <Plus size={20} color='#f4ecf4' />
           </button>
         </div>
-      </ScrollShadow>
+      {/* </ScrollShadow> */}
     </div>
   )
 }

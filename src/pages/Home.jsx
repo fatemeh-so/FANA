@@ -7,13 +7,15 @@ import BottomBar from '../components/BottomBar'
 import HomeBar from '../features/home/HomeBar'
 function Home() {
   return (
+
     <>
+
       <div className='h-[85vh]  overflow-hidden'>
-        {/* <Header /> */}{' '}
-        {/* <div className='hidden xl:block  xl:flex  xl:justify-between'> */}
+ 
         <HomeAlbum />
         {/* <Filter /> */}
         <div className='flex w-[100%]'>
+        
           <HomeMusic />
           <div className='hidden xl:block '>
             <HomeBar />

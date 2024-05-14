@@ -18,3 +18,14 @@ export function formatToSecs (duration="00:03:33") {
   const totalSeconds = hours * 3600 + minutes * 60 + seconds
   return totalSeconds
 }
+
+
+export function convertSecondsToTime(seconds) {
+  seconds = parseInt(seconds); // Convert to integer to remove decimal part
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+  return `${formattedMinutes}:${formattedSeconds}`;
+
+}

@@ -14,7 +14,8 @@ import Slider1 from './Slider'
 import PlayerButton from './PlayerButton'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { usePlayer } from '../contexts/musicPLayerContext'
-function MusicPlayer({ songValue }) {
+import PlayerButton1 from './PlayerButton1'
+function MusicPlayer({ songValue, dur }) {
   const { music } = useOpenPlayer()
   const {
     isRepeat,
@@ -40,25 +41,25 @@ function MusicPlayer({ songValue }) {
   return (
     <ModalContent>
       <>
-        <ModalHeader className='bg-gray-700 w-[100%] h-[95vh] sm:h-[90vh] flex justify-center items-center flex-col gap-1'>
+        <ModalHeader className='bg-gray-700 w-[100%] h-[93vh] sm:h-[90vh] flex justify-evenly items-center flex-col gap-1'>
           <div className='z-10 overflow-hidden absolute bottom-[0] w-[100%] h-[95%] rounded-t-[1.5rem] bg-gray-700/90'>
-            <div className='w-[100%] h[100%] flex justify-center flex-col'>
-              <div className='flex-col flex items-center justify-center'>
+            <div className='w-[100%] h[100%] flex justify-end flex-col'>
+              <div className='flex-col flex items-center justify-between'>
                 <img
                   className='w-[90%] h-[25rem] sm:h-[33rem] rounded-[1rem]'
                   src={musicTrack?.coverArt}
                   alt=''
                 />
-                <div className='w-[85%] mt-[1rem] sm:mt-[.9rem]'>
+                <div className='w-[85%] mt-[1rem] text-center sm:mt-[.9rem]'>
                   <h1 className='text-[2rem] text-white1 mt-[1.5rem]'>
                     {musicTrack?.title}
                   </h1>
                   <h3 className='text-gray300 mt-[1rem] font-normal'>
                     {musicTrack?.artist}
                   </h3>
-                  <div className='mt-[-3rem]'>
-                    <PlayerButton music={musicTrack} />
-                  </div>
+                  {/* <div className='mt-[-3rem]'>
+                    {/* <PlayerButton1 music={musicTrack} /> */}
+                  {/* </div> */}
                 </div>
               </div>
               {/* icons */}
@@ -92,7 +93,7 @@ function MusicPlayer({ songValue }) {
                 </div>
               </div>
               <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
-                <Slider1 songValue={songValue} />
+                <Slider1 songValue={songValue} dur={dur} />
               </div>
             </div>
           </div>

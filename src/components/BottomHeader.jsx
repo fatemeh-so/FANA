@@ -1,4 +1,4 @@
-import { CaretLeft, Heart, UserCheck, UserCircle } from '@phosphor-icons/react'
+import { CaretLeft, FolderSimpleUser, Heart, UserCheck, UserCircle } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useOpenAlbum } from '../contexts/openAlbumContext'
@@ -54,7 +54,7 @@ function BottomHeader({ leftContent = true, size, to, icon }) {
         >
           {/* <UserCheck size={20} color='#f5f0f5' /> */}
           {icon === 'user' ? (
-            <UserCheck size={20} color='#f5f0f5' />
+            <FolderSimpleUser size={21} color='#f5f0f5' />
           ) : (
             <Heart size={20} color='#f5f0f5' />
           )}

@@ -9,7 +9,7 @@ export default function HomeAlbum() {
   const {handelPlayMusic}=useOpenPlayer()
   const navigate = useNavigate()
   function handelNavigateToAlbums() {
-    navigate('/albums')
+    navigate('/albums/1')
   }
 
   if (isLoading) {
@@ -17,6 +17,7 @@ export default function HomeAlbum() {
   }
   return (
     <div className='relative w-full mt-5rem mt-[4rem] overflow-hidden'>
+             {/* <h1 className='mb-[1rem] text-3xl'>Pop Trend music</h1> */}
       <div className='flex'>
         {albums.map((album, index) => (
           <div

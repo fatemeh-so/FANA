@@ -12,7 +12,7 @@ function MyPlaylist() {
   if (isLoading) return <Spinner />
   return (
     <>
-      <div className='h-[85vh] '>
+      <div className='h-[88vh] '>
         {/* <BottomHeader /> */}
         <BottomHeader />
 
@@ -23,7 +23,7 @@ function MyPlaylist() {
           ))}
         </div>
       </div>
-      {/* <BottomBar /> */}
+      <BottomBar />
     </>
   )
 }

@@ -31,8 +31,8 @@ function HomeBar() {
 
   return (
     <div className='flex flex-col  w-[100vh] overflow-x-hidden'>
-      <h1 className='mt-[2rem] ml-[2rem] text-[1.5rem]'>Hot music </h1>
-      <div className='flex overflow-x-auto mt-[1rem] ml-[2rem] space-x-4'>
+      <h1 className='mt-[2.2rem] mb-[1.2rem] ml-[2rem] text-[1.5rem]'>Hot music </h1>
+      <div className='flex overflow-x-auto  ml-[2rem] space-x-4'>
         {album?.map((album, index) => (
           <div key={index} className='relative flex-shrink-0'>
             <img
@@ -59,8 +59,8 @@ function HomeBar() {
           &gt;
         </button>
       </div>{' '}
-      <h1 className='mt-[2rem] ml-[2rem] text-[1.5rem]'>Artist </h1>
-      <div className='flex  mt-[1rem] ml-[2rem] space-x-4'>
+      <h1 className='my-[1rem] ml-[2rem] text-[1.5rem]'>Artist </h1>
+      <div className='flex  mt-[1rem] ml-[2rem] space-x-4 overflow-x-auto'>
         {artist?.map((artist, index) => (
           <div key={index} className='relative flex-shrink-0'>
             <img
