@@ -9,7 +9,7 @@ export default function Modal1({songValue,dur}) {
 //  console.log(nextMusic);
   return (
     <div className=''>
-      <Modal1
+      <Modal
         isOpen={isOpenPlayer}
         // placement='bottom'
         backdrop='blur'
@@ -18,7 +18,7 @@ export default function Modal1({songValue,dur}) {
         size='2xl'
       >
         <MusicPlayer songValue={songValue} dur={dur} />
-      </Modal1>
+      </Modal>
     </div>
   )
 }
