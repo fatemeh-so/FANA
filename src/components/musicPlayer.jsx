@@ -12,7 +12,7 @@ import { ModalContent, ModalHeader } from '@nextui-org/react'
 import Slider1 from './Slider'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { usePlayer } from '../contexts/musicPLayerContext'
-function MusicPlayer({ songValue, dur }) {
+function MusicPlayer({ songValue }) {
   const { music } = useOpenPlayer()
   const {
     isRepeat,
@@ -90,7 +90,7 @@ function MusicPlayer({ songValue, dur }) {
                 </div>
               </div>
               <div className='flex flex-col mx-[1.5rem] mt-[4rem] h-[15vh] justify-between'>
-                <Slider1 songValue={songValue} dur={dur} />
+                <Slider1 songValue={songValue}  />
               </div>
             </div>
           </div>
