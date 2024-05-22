@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import { usePlayer } from '../contexts/musicPLayerContext'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 
-export default function Slider1({ songValue = '00:00', dur }) {
+export default function Slider1({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
   const { valueTime, setValueTime, playNext, playPrev, musicUi } = usePlayer()
   let musicTrack
@@ -18,9 +18,7 @@ export default function Slider1({ songValue = '00:00', dur }) {
   } else {
     musicTrack = music
   }
-  if (!dur) {
-    dur = musicTrack?.duration
-  }
+ 
   function handel(value) {
     setValueTime(value)
   }
