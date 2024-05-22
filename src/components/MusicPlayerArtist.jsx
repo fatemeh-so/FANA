@@ -9,8 +9,6 @@ import {
   SkipForward,
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
-import Slider1 from './Slider'
-import PlayerButton from './PlayerButton'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
 import SliderSinger from './SliderSinger'

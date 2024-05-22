@@ -1,7 +1,7 @@
 import { Modal, useDisclosure } from '@nextui-org/react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import MusicPlayer from './MusicPlayer'
-
+// import MusicPlayer from './MusicPlayer'
+import MusicPlayer from"./MusicPlayer"
 export default function Modal1({songValue,dur}) {
   const { isOpenPlayer, handelPlayMusic } = useOpenPlayer()
 

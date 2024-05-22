@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import {
   ArrowsDownUp,
   PauseCircle,
@@ -11,10 +10,8 @@ import {
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
 import Slider1 from './Slider'
-import PlayerButton from './PlayerButton'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { usePlayer } from '../contexts/musicPLayerContext'
-import PlayerButton1 from './PlayerButton1'
 function MusicPlayer({ songValue, dur }) {
   const { music } = useOpenPlayer()
   const {
