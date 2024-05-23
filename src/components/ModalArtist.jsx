@@ -1,6 +1,5 @@
 import { Modal, useDisclosure } from '@nextui-org/react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import MusicPlayer from './MusicPlayer'
 import MusicPlayerArtist from './MusicPlayerArtist'
 
 export default function ModalArtist({songValue}) {
