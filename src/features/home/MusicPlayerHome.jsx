@@ -9,9 +9,9 @@ import {
     SkipForward,
   } from '@phosphor-icons/react'
   import { ModalContent, ModalHeader } from '@nextui-org/react'
-  import Slider1 from './Slider'
   import { useOpenPlayer } from '../contexts/openPlayerContext'
   import { usePlayer } from '../contexts/musicPLayerContext'
+import Slider1 from '../../components/Slider'
   function MusicPlayerHome({ songValue }) {
     const { music } = useOpenPlayer()
     const {
