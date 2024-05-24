@@ -78,7 +78,7 @@ function MusicPLayerProvider({ children }) {
     } else {
       setShuffledMusic(filterMusic)
     }
-  }, [filterMusic, isShuffle,valueTime])
+  }, [filterMusic, isShuffle])
 
   // useEffect(() => {
   //   if (!isShuffle) {
@@ -89,6 +89,7 @@ function MusicPLayerProvider({ children }) {
     //when open music player.then ...
     setPlayNext(false)
     setMusicUi(music)
+  
     // setSkip(currentMusic)
   }, [isOpenPlayer])
 
