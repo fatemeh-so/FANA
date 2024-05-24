@@ -37,7 +37,7 @@ function MusicPlayerAlbum({ songValue }) {
   return (
     <ModalContent>
       <>
-      <ModalHeader className='bg-gray-700 w-[100%] h-[85vh] md:h-[93%] sm:h-[90vh] flex justify-evenly items-center flex-col gap-1'>
+      <ModalHeader className='bg-gray-700 w-[100%] h-[85vh] md:h-[93vh] sm:h-[90vh] flex justify-evenly items-center flex-col gap-1'>
           <div className='z-10 overflow-hidden absolute bottom-[0] w-[100%] h-[95%] rounded-t-[1.5rem] bg-gray-700/90'>
             <div className='w-[100%] h[100%] flex justify-center flex-col'>
               <div className='flex-col flex items-center justify-center'>
