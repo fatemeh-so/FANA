@@ -6,7 +6,7 @@ import { formatDuration } from '../../helper/formattedDuration'
 import { useDeletePlaylist } from './useDelete'
 
 function HomeMusicChild({ music, index }) {
-  const { id, title, artist, coverArt, duration } = music
+  const { id, title, artist, coverArt, duration,url } = music
   const { mutate: deletePlaylist, isLoading } = useDeletePlaylist()
   const { handelMyPlay } = useOpenPlayer()
   function handelTrash(musicId) {
@@ -38,7 +38,7 @@ function HomeMusicChild({ music, index }) {
             {formatDuration(duration)}
           </div>
           <div className='ml-6 text-right text-[.8rem] text-gray300'>
-            {<DownloadSimple size={20} color='#f4ecf4' />}
+          <a href={url}>{<DownloadSimple size={20} color='#f4ecf4' />}</a>
           </div>
           <div
             onClick={() => handelTrash(id)}

@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner'
 import { useEffect } from 'react'
 
 function ArtistMusicChild({ music, index}) {
-  const { title, artist, coverArt, duration } = music
+  const { title, artist, coverArt, duration,url } = music
   const { handelArtistMusic } = useOpenPlayer()
   const [isLike, setIsLike] = useState(false)
   
@@ -46,7 +46,7 @@ function ArtistMusicChild({ music, index}) {
             {formatDuration(duration)}
           </div>
           <div className='ml-5 hidden md:block text-right text-[.8rem] text-gray300'>
-            {<DownloadSimple size={20} color='#f4ecf4' />}
+          <a href={url}>{<DownloadSimple size={20} color='#f4ecf4' />}</a>
           </div>
           <button
             onClick={handelLike}
