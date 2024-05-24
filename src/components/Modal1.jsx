@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Modal, useDisclosure } from '@nextui-org/react';
 import { useOpenPlayer } from '../contexts/openPlayerContext';
-import MusicPlayer from './MusicPlayer';
+import MusicPlayerHome from '../features/home/MusicPlayerHome';
 
 
 export default function Modal1({ songValue, dur }) {
@@ -18,7 +18,7 @@ export default function Modal1({ songValue, dur }) {
         onClose={handelPlayMusic}
         size='2xl'
       >
-        <MusicPlayer songValue={songValue}  />
+        <MusicPlayerHome songValue={songValue}/>
       </Modal>
     </div>
   );

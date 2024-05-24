@@ -12,7 +12,7 @@ import {
   import Slider1 from './Slider'
   import { useOpenPlayer } from '../contexts/openPlayerContext'
   import { usePlayer } from '../contexts/musicPLayerContext'
-  function MusicPlayer({ songValue }) {
+  function MusicPlayerHome({ songValue }) {
     const { music } = useOpenPlayer()
     const {
       isRepeat,
@@ -100,5 +100,5 @@ import {
     )
   }
   
-  export default MusicPlayer
+  export default MusicPlayerHome
   
