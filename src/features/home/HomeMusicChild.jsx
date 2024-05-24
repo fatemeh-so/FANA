@@ -52,7 +52,7 @@ function HomeMusicChild({ music, index }) {
           </button>
           <button
             onClick={handelLike}
-            className=' hidden md:block ml-6 text-right text-[.8rem] text-gray300 '
+            className='  md:block ml-6 text-right text-[.8rem] text-gray300 '
           >
             <Plus size={20} color='#f4ecf4' />
           </button>
