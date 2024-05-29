@@ -18,6 +18,11 @@ function SearchResult() {
     setSearchFocus(false)
     // handelCloseHeader(false)
   }
+  function handelArtist(id) {
+    navigate(`/artist/${id}`)
+    setSearchFocus(false)
+    // handelCloseHeader(false)
+  }
   return (
     // music
     <div className='top-[4.1rem] absolute z-50 bg-gray-600  w-[99%] h-[93vh]  px-[rem] overflow-x-hidden'>
@@ -62,7 +67,7 @@ function SearchResult() {
               <img
                 src={singer.image}
                 onClick={() => {
-                  // handelArtist(singer.id, singer.title)
+                  handelArtist(singer.id, singer.title)
                 }}
                 alt={singer.nickName}
                 className='w-full h-[100%] object-cover rounded-full  '
