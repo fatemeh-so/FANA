@@ -77,6 +77,7 @@ function MusicPLayerProvider({ children }) {
 
     } else {
       setShuffledMusic(filterMusic)
+      
     }
   }, [filterMusic, isShuffle])
 
@@ -110,6 +111,7 @@ function MusicPLayerProvider({ children }) {
       audioRef.current.src = shuffledMusic[prev].url
       setMusicUi(shuffledMusic[prev])
       audioRef.current.play()
+      
     }
   }, [shuffledMusic, playPrev, prev])
 
