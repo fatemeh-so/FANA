@@ -1,5 +1,4 @@
 import { MusicNotesSimple, PlayCircle } from '@phosphor-icons/react'
-import useAlbum from '../../features/Albums/useAlbum'
 import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
 import useMusic from '../../features/home/useMusic'

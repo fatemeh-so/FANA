@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
-import { ScrollShadow } from '@nextui-org/react'
 import { DownloadSimple, Plus, UserSound } from '@phosphor-icons/react'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { formatDuration } from '../../helper/formattedDuration'
 import { useState } from 'react'
 import useAddInPlaylist from '../MyPlaylist/useAddInPlaylist'
 import Spinner from '../../components/Spinner'
-import { useEffect } from 'react'
 
 function HomeMusicChild({ music, index }) {
   const { title, artist, coverArt, duration, url } = music

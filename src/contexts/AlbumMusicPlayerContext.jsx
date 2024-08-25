@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { useOpenPlayer } from './openPlayerContext'
+import { formatToSecs } from '../helper/formattedDuration';
 const AlbumMusicContext = createContext()
 function shuffleArray(array) {
   const shuffledArray = [...array]
@@ -52,6 +53,13 @@ function AlbumMusicProvider({ children }) {
           }
         } else {
           audioRef.current.pause()
+          if (playNext) {
+            //when click on next btn
+            audioRef.current.src = shuffledMusic[skip].url
+            setMusicUi(shuffledMusic[skip])
+            audioRef.current.currentTime = valueTime
+            // audioRef.current.play()
+          }
         }
       }
     },
@@ -71,13 +79,30 @@ function AlbumMusicProvider({ children }) {
   )
 
   useEffect(() => {
+    let shuffleTimeout
+
     if (isShuffle) {
-      //when shuffle is true
-      setShuffledMusic(shuffleArray(filterMusic))
+      const formattedToSeconds = formatToSecs(
+        filterMusic[currentMusic]?.duration
+      )
+
+      shuffleTimeout = setTimeout(() => {
+        const shuffledArray = shuffleArray(filterMusic)
+        setShuffledMusic([...shuffledArray])
+        audioRef.current.currentTime = valueTime
+      }, (formattedToSeconds - valueTime) * 1000)
     } else {
       setShuffledMusic(filterMusic)
     }
-  }, [filterMusic, isShuffle])
+  // Cleanup the timeout when the effect is re-run or the component is unmounted
+  return () => {
+    if (shuffleTimeout) {
+      clearTimeout(shuffleTimeout)
+    }
+  }
+}, [isShuffle, filterMusic, currentMusic, valueTime])
+
+
 
   useEffect(() => {
     //when open music player.then ...
@@ -85,24 +110,35 @@ function AlbumMusicProvider({ children }) {
     setMusicUi(music)
     setSkip(currentMusic)
   }, [isOpenAlbumMusic])
+
+
   useEffect(() => {
     //when open music player.then start from 0 sec ...
     if (isOpenAlbumMusic === true) {
       setSkip(currentMusic)
     }
   }, [isOpenAlbumMusic])
+
+
+
   useEffect(() => {
     //it back current time to 0 when user click on next btn
     audioRef.current.currentTime = 0
-  }, [shuffledMusic, playNext, skip])
+    setValueTime(0)
+  }, [playNext, skip])
+
+
+
   useEffect(() => {
     if (playPrev) {
       // when user click on prev btn
       audioRef.current.src = shuffledMusic[prev].url
       setMusicUi(shuffledMusic[prev])
+      audioRef.current.currentTime = valueTime
+
       audioRef.current.play()
     }
-  }, [shuffledMusic, playPrev, prev])
+  }, [shuffledMusic, playPrev, prev, valueTime])
 
   function handleRepeat() {
     setIsRepeat((isRepeat) => !isRepeat)
@@ -114,10 +150,16 @@ function AlbumMusicProvider({ children }) {
 
   function handlePlay() {
     setIsPlay((play) => !play)
-    console.log(playNext)
   }
   function handelPlayNext() {
     setPlayNext(true)
+    if (isShuffle) {
+      const nextIndex = (skip + 1) % shuffledMusic.length
+      setSkip(nextIndex)
+      if (skip > allMusiclength) {
+        setSkip(0)
+      }
+    }
     setSkip((s) => s + 1)
     if (skip > allMusiclength) {
       setSkip(0)
@@ -126,15 +168,9 @@ function AlbumMusicProvider({ children }) {
   function handelPlayPrev() {
     setPlayPrev(true)
     setPrev((s) => s - 1)
+    setMusicUi(shuffledMusic[prev])
     if (prev < 1) {
       setPrev(allMusiclength)
-    }
-  }
-  function playNextFunc() {
-    setPlayNext(true)
-    setSkip((s) => s + 1)
-    if (skip > allMusiclength) {
-      setSkip(0)
     }
   }
   return (
@@ -154,7 +190,6 @@ function AlbumMusicProvider({ children }) {
         valueTime,
         setValueTime,
         musicUi,
-        playNextFunc,
       }}
     >
       {children}

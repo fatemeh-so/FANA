@@ -6,9 +6,7 @@ import {
   formatToSecs,
 } from '../helper/formattedDuration'
 import { useEffect } from 'react'
-import { usePlayer } from '../contexts/musicPLayerContext'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { useMyPlayer } from '../contexts/MyMusicPLayerContext '
 import { useAlbumPlayer } from '../contexts/AlbumMusicPlayerContext'
 
 export default function SliderAlbum({ songValue = '00:00' }) {

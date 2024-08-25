@@ -17,9 +17,9 @@ function BottomBar() {
   }, [pathname, handleNavLinkClick]);
 
   return (
-    <div className='relative flex justify-center'>
-      <div className='fixed bottom-4 md:bottom-8 rounded-[2rem] flex justify-center items-center bg-gray-700 opacity-90 p-0 w-[90%] md:w-[50%] lg:w-[36%] h-[10%]'>
-        <ul className='flex gap-[3.5rem] md:gap-[4rem] text-white'>
+    <div className='relative flex justify-center '>
+      <div className='fixed w-[90%] md:w-full md:max-w-[42rem] bottom-4 md:bottom-4 xl:bottom-[.8rem] rounded-[2rem] flex  items-center bg-gray-700 opacity-90 xl:px-[4rem] md:px-[4rem] md:py-8 xl:py-[2rem] px-12 py-8'>
+        <ul className='flex gap-[3.5rem] md:gap-[4rem] justify-between text-white w-full'>
           <li onClick={() => handleNavLinkClick('/home')}>
             <NavLink
               to='/home'

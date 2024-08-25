@@ -2,13 +2,13 @@ import { Button, Input } from '@nextui-org/react'
 import { useForm } from 'react-hook-form'
 import BottomHeader from '../components/BottomHeader'
 import { useNavigate } from 'react-router-dom'
-import useSignUp from '../features/auth/useSignUp'
 import Spinner from '../components/Spinner'
+import useSignup from '../features/auth/useSignUp'
 // import BottomHeader from '../components/BottomHeader'
 function SignUp() {
   const { register, getValues, formState, handleSubmit, reset } = useForm()
   const { errors } = formState
-  const { isLoading, mutate: signUp } = useSignUp()
+  const { isLoading, mutate: signUp } = useSignup()
   const navigate = useNavigate()
 
   function onSubmit({ fullName, email, password }) {

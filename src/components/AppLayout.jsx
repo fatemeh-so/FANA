@@ -21,17 +21,17 @@ function AppLayout() {
   const {
     audioRef: audioRef1,
     audioSrc: audioSrc1,
-    playNextFunc:myPlayNextFunc
+    playNextFunc: myPlayNextFunc,
   } = useMyPlayer()
   const {
     audioRef: audioRefAlbum,
     audioSrc: audioSrcAlbum,
-    playNextFunc:albumPlayNextFunc
+    playNextFunc: albumPlayNextFunc,
   } = useAlbumPlayer()
   const {
     audioRef: audioRefArtist,
     audioSrc: audioSrcArtist,
-    playNextFunc:artistPlayNextFunc
+    playNextFunc: artistPlayNextFunc,
   } = useArtistPlayer()
 
   const [songValue, setSongValue] = useState()
@@ -63,15 +63,17 @@ function AppLayout() {
   }
   function handelEndPlaylist() {
     myPlayNextFunc()
-  }  function handelEndAlbum() {
+  }
+  function handelEndAlbum() {
     albumPlayNextFunc()
-  }  function handelEndArtist() {
+  }
+  function handelEndArtist() {
     artistPlayNextFunc()
   }
   useEffect(() => {}, [])
   return (
-    <div className='text-white1    overflow-y-scroll bg-gradient-to-b from-gray-900 via-gray-900 to-gray900 opacity-[94%] w-[100%] h-[100vh]'>
-      <div className=' absolute w-[300px] h-[300px] bg-purple-950/40 blur-3xl rounded-full -top-36 -left-36'></div>
+    <div className='text-white1 overflow-y-scroll bg-gradient-to-b from-gray-900 via-gray-900 to-gray900 opacity-[94%]'>
+      <div className='absolute w-[300px] h-[300px] bg-purple-950/40 blur-3xl rounded-full -top-36 -left-36'></div>
       {isOpenPlayList ? <ModalPlaylist songValue={songValue1} /> : ''}
       {isOpenPlayer ? <Modal1 songValue={songValue} dur={dur} /> : ''}
       {isOpenAlbumMusic ? <ModalAlbum songValue={songValueAlbum} /> : ''}
@@ -105,11 +107,11 @@ function AppLayout() {
         onEnded={handelEndArtist}
       />
 
-      <main className='h-[100vh] w-[100%] '>
+      <main className='h-[100vh] w-[100%]'>
         <div className='flex flex-col items-center'>
           {pathname === '/home' && <Header />}
           {searchFocus && <SearchResult />}
-          <div className='h-[100%] flex flex-col   justify-between w-[90%]  '>
+          <div className='h-[100%] flex flex-col justify-between w-[90%]'>
             <Outlet />
             {/* <BottomBar /> */}
           </div>

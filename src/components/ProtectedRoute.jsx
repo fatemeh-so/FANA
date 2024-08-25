@@ -7,10 +7,12 @@ function ProtectedRoute({ children }) {
   const { data, isLoading, isAuthenticated } = useUser()
   const navigate = useNavigate()
 
+
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) {
-        navigate('/signup')
+        // navigate('/signup')
+        console.log("false");
       }
     },
     [isAuthenticated, isLoading,navigate]

@@ -56,16 +56,18 @@ function HomeMusic() {
   }
 
   return (
-    <div onClick={()=> handelFilterMusic(filteredMusic)} className=' mt-[2rem]  w-full'>
+    <div onClick={() => handelFilterMusic(filteredMusic)} className='w-full '>
       <ScrollShadow
         hideScrollBar
-        offset={10}
+        offset={14}
         orientation='horizontal'
-        className='  max-h-[60vh] '
+        className='max-h-[60vh] pb-8'
       >
         <div className='flex overflow-y-auto'>
-          <div className='w-full h-[100vh]'>
-            <Filter />
+          <div className='w-full'>
+            <div className='mb-4'>
+              <Filter />
+            </div>
             {filteredMusic.map((filteredMusicItem, index) => (
               <HomeMusicChild
                 key={filteredMusicItem.id}
