@@ -14,7 +14,7 @@ function Artist() {
   return (
     <>
     <div className='h-[88vh]  '>
-      <BottomHeader icon='user' />
+      {/* <BottomHeader icon='user' /> */}
       <SingerIcons singer={singer} />
     </div>
 <BottomBar/>

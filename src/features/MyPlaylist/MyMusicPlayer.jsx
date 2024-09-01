@@ -30,13 +30,12 @@ function MyMusicPlayer({ songValue }) {
     musicUi,
   } = useMyPlayer()
 
-  let musicTrack
-  // const musicTrack = playNext ? musicUi : music
-  if (playPrev || playNext) {
-    musicTrack = musicUi
-  } else {
-    musicTrack = music
-  }
+  const [musicTrack, setMusicTrack] = useState(music)
+
+  useEffect(() => {
+      setMusicTrack(musicUi)
+  }, [musicUi, playPrev, playNext,musicTrack])
+
   return (
     <ModalContent>
       <>

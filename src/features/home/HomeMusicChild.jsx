@@ -24,7 +24,7 @@ function HomeMusicChild({ music, index }) {
       <div
         className='flex items-center'
         onClick={() => {
-          handelPlayMusic(music, index)
+          handelPlayMusic(music)
         }}
       >
         <span className='ml-2 font-thin  text-[.8rem] '>{index}</span>

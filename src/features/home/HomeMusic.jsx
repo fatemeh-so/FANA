@@ -5,7 +5,6 @@ import Spinner from '../../components/Spinner'
 import { useSearchParams } from 'react-router-dom'
 import Filter from '../../components/Filter'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
-import { useEffect } from 'react'
 
 // import { Play } from '@phosphor-icons/react'
 
@@ -61,7 +60,7 @@ function HomeMusic() {
         hideScrollBar
         offset={14}
         orientation='horizontal'
-        className='max-h-[60vh] pb-8'
+        className='xl:max-h-[60vh] md:pb-4 xl:pb-8'
       >
         <div className='flex overflow-y-auto'>
           <div className='w-full'>

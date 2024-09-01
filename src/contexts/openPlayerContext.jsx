@@ -20,21 +20,21 @@ function OpenPlayerProvider({ children }) {
   const [musicOfAlbum, setMusicOfAlbum] = useState()
   const [musicOfArtist, setMusicOfArtist] = useState()
 
-  function handelPlayMusic(music, index) {
+  function handelPlayMusic(music) {
     setIsOpenPlayer((isOpenPlayer) => !isOpenPlayer)
     setMusic(music)
   }
 
-  function handelMyPlay(music, index) {
+  function handelMyPlay(music) {
     setIsOpenPlayList((isOpen) => !isOpen)
     setMyMusic(music)
     // console.log(isOpenPlayList);
   }
-  function handelAlbumMusic(music, index) {
+  function handelAlbumMusic(music) {
     setIsOpenAlbumMusic((isOpenPlayer) => !isOpenPlayer)
     setAlbumMusic(music)
   }
-  function handelArtistMusic(music, index) {
+  function handelArtistMusic(music) {
     setIsOpenArtistMusic((isOpenPlayer) => !isOpenPlayer)
     setArtistMusic(music)
   }

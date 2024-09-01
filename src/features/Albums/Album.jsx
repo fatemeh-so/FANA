@@ -1,22 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useOpenAlbum } from '../../contexts/openAlbumContext'
-import AlbumTrack from './AlbumTrack'
+import { useNavigate } from 'react-router-dom'
 
 function Album({ albums }) {
-  const [searchParams, setSearchParams] = useSearchParams()
 
   // const[title]
   const navigate = useNavigate()
   function handelAlbum(id) {
     navigate(`/albums/${id}`)
   }
-  const { isOpenAlbum, handelOpenAlbum } = useOpenAlbum()
-  // if (isOpenAlbum) return <AlbumTrack />
   return (
     <>
       <div>
-        <h1 className='my-4 text-[2rem] '>Library</h1>
+      <h1 className='pt-8 pb-4 pl-2 text-[2rem] text-white1 z-30'>Library</h1>
 
         <div className=' grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4'>
           {albums?.map((albums, index) => (

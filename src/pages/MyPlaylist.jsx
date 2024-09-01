@@ -14,9 +14,9 @@ function MyPlaylist() {
     <>
       <div className='h-[88vh] '>
         {/* <BottomHeader /> */}
-        <BottomHeader />
+        {/* <BottomHeader /> */}
 
-        <h1 className='mt-[1rem] text-[2rem] text-white1 z-30 '>My Playlist</h1>
+        <h1 className='pt-8 pb-4 pl-2 text-[2rem] text-white1 z-30'>My Playlist</h1>
         <div  onClick={()=>handelMusicOfPlaylist(music)} className=' relative flex flex-col  w-[100%]'>
           {music.map((music,index) => (
             <MyPlaylistChild key={music.created_at} music={music} index={index+1} />

@@ -12,7 +12,7 @@ function Albums() {
   return (
     <>
   
-      <div className='h-[88vh]  '>  <BottomHeader icon="user"/>
+      <div className='h-[88vh]  '>  
         <Album albums={albums} />
       </div>{' '}
       <BottomBar />

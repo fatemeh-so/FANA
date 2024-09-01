@@ -1,8 +1,9 @@
 import { MusicNotesSimple, PlayCircle } from '@phosphor-icons/react'
 import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
-import useMusic from '../../features/home/useMusic'
+// import useMusic from '../../features/home/useMusic'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
+import useMusic from './useMusic'
 export default function HomeAlbum() {
   const { data: albums, isLoading } = useMusic()
   const {handelPlayMusic}=useOpenPlayer()
@@ -14,6 +15,7 @@ export default function HomeAlbum() {
   if (isLoading) {
     return <Spinner />
   }
+  console.log(albums);
   return (
     <div className='relative w-full mt-5rem mt-[4rem] overflow-hidden'>
              {/* <h1 className='mb-[1rem] text-3xl'>Pop Trend music</h1> */}

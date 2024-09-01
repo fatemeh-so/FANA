@@ -5,11 +5,13 @@ import HomeAlbum from '../features/home/homeAlbum'
 import HomeMusic from '../features/home/HomeMusic'
 import BottomBar from '../components/BottomBar'
 import HomeBar from '../features/home/HomeBar'
+import useMusic from '../features/home/useMusic'
 function Home() {
+  const { data: music, isLoading } = useMusic()
   return (
     <>
       <div className='overflow-hidden'>
-        <HomeAlbum />
+        <HomeAlbum music={music} isLoading={isLoading} />
         {/* <Filter /> */}
         <div className='flex w-[100%] mt-8'>
           <HomeMusic />

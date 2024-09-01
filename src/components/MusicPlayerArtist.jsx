@@ -12,6 +12,7 @@ import { ModalContent, ModalHeader } from '@nextui-org/react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
 import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
 import SliderSinger from './SliderSinger'
+import { useEffect, useState } from 'react'
 function MusicPlayerArtist({ songValue }) {
   const { ArtistMusic: music } = useOpenPlayer()
   const {
@@ -27,13 +28,12 @@ function MusicPlayerArtist({ songValue }) {
     playPrev,
     musicUi,
   } = useArtistPlayer()
-  let musicTrack
-  // const musicTrack = playNext ? musicUi : music
-  if (playPrev || playNext) {
-    musicTrack = musicUi
-  } else {
-    musicTrack = music
-  }
+  const [musicTrack, setMusicTrack] = useState(music)
+
+  useEffect(() => {
+      setMusicTrack(musicUi)
+  }, [musicUi, playPrev, playNext,musicTrack])
+
   return (
     <ModalContent>
       <>
