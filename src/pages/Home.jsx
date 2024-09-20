@@ -1,5 +1,3 @@
-import Header from '../components/Header'
-import Filter from '../components/Filter'
 
 import HomeAlbum from '../features/home/homeAlbum'
 import HomeMusic from '../features/home/HomeMusic'
@@ -8,6 +6,7 @@ import HomeBar from '../features/home/HomeBar'
 import useMusic from '../features/home/useMusic'
 function Home() {
   const { data: music, isLoading } = useMusic()
+  console.log(music);
   return (
     <>
       <div className='overflow-hidden'>

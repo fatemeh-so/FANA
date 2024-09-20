@@ -9,37 +9,38 @@ export default function HomeAlbum() {
   const {handelPlayMusic}=useOpenPlayer()
   const navigate = useNavigate()
   function handelNavigateToAlbums() {
-    navigate('/albums/1')
+    navigate('/albums')
   }
 
   if (isLoading) {
     return <Spinner />
   }
-  console.log(albums);
+  console.log("rr",albums);
   return (
     <div className='relative w-full mt-5rem mt-[4rem] overflow-hidden'>
              {/* <h1 className='mb-[1rem] text-3xl'>Pop Trend music</h1> */}
       <div className='flex'>
-        {albums.map((album, index) => (
+        {albums?.map((album, index) => (
           <div
             onClick={() => {
               handelPlayMusic(album,)
+              console.log("bb",album);
             }}
             key={index}
             className='relative flex-shrink-0 w-64 h-48 mr-4'
           >
             <img
-              src={album.coverArt}
-              alt={album.title}
+              src={album?.coverArt}
+              alt={album?.title}
               className='w-full h-full rounded-[1rem] object-cover'
             />
             <div className='absolute inset-0 flex items-center justify-center  bg-opacity-50'>
               <div className='text-white     overflow-hidden bg-gray-700/60 absolute left-[2rem] bottom-[1rem] w-[13rem] h-[4.8rem] rounded-[1rem]  pl-[1.3rem] pt-[1rem] text-[0.6rem] '>
-                <p className=' text-[0.9rem] '>{album.title}</p>
+                <p className=' text-[0.9rem] '>{album?.title}</p>
                 <div className='flex'>
                   <span className='flex gap-1'>
                     <MusicNotesSimple size={10} color='#fcfcff' weight='fill' />
-                    <p>music - {album.artist}</p>
+                    <p>music - {album?.artist}</p>
                   </span>
                   <div className='flex absolute left-[8rem] top-[0.9rem] '>
                     <span>

@@ -22,7 +22,7 @@ function MusicPLayerProvider({ children }) {
   const [valueTime, setValueTime] = useState(0)
   const [playNext, setPlayNext] = useState(false)
   const [playPrev, setPlayPrev] = useState(false)
-  const [shuffledMusic, setShuffledMusic] = useState([])
+  const [shuffledMusic, setShuffledMusic] = useState(music)
 
   const allMusiclength = shuffledMusic?.length - 2
   const [musicUi, setMusicUi] = useState()
@@ -40,7 +40,7 @@ function MusicPLayerProvider({ children }) {
           // when video is play
 
           audioRef.current.loop = isRepeat
-          audioRef.current.src = shuffledMusic[currentMusic].url
+          audioRef.current.src = shuffledMusic?shuffledMusic[currentMusic].url:music.url
           audioRef.current.currentTime = valueTime
           audioRef.current.play()
 
