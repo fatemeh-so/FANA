@@ -1,30 +1,29 @@
 import { MusicNotesSimple, PlayCircle } from '@phosphor-icons/react'
 import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
-// import useMusic from '../../features/home/useMusic'
 import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import useMusic from './useMusic'
 export default function HomeAlbum() {
   const { data: albums, isLoading } = useMusic()
-  const {handelPlayMusic}=useOpenPlayer()
+  const { handelPlayMusic ,handelFilterMusic} = useOpenPlayer()
   const navigate = useNavigate()
   function handelNavigateToAlbums() {
     navigate('/albums')
   }
 
+  console.log(albums)
   if (isLoading) {
     return <Spinner />
   }
-  console.log("rr",albums);
   return (
     <div className='relative w-full mt-5rem mt-[4rem] overflow-hidden'>
-             {/* <h1 className='mb-[1rem] text-3xl'>Pop Trend music</h1> */}
+      {/* <h1 className='mb-[1rem] text-3xl'>Pop Trend music</h1> */}
       <div className='flex'>
         {albums?.map((album, index) => (
           <div
             onClick={() => {
-              handelPlayMusic(album,)
-              console.log("bb",album);
+              handelPlayMusic(album)
+              handelFilterMusic(albums)
             }}
             key={index}
             className='relative flex-shrink-0 w-64 h-48 mr-4'
