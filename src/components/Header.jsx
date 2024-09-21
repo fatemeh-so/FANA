@@ -15,31 +15,18 @@ import { NavLink } from 'react-router-dom'
 import SearchInput from './SearchInput'
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
- 
-  // const{handelCloseHeader}=useDeleteHeader()
-  // const menuItems = [
-  //   // 'Profile',
-  //   // 'Dashboard',
-  //   // 'Activity',
-  //   // 'Analytics',
-  //   // 'System',
-  //   // 'Deployments',
-  //   // 'My Settings',
-  //   // 'Team Settings',
-  //   // 'Help & Feedback',
-  //   'Home',
-  //   'Albums',
-  //   'Playlist',
-  //   'Sign Up',
-  // ]
+
   return (
-    <div className='  h-[3vh] w-[100%]'>
+    <div className='h-[3vh] w-[100%]'>
       <Navbar
         isBordered
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
+        className='w-full'
+        maxWidth='2xl'
       >
         <NavbarContent className='sm:hidden' justify='start'>
           <NavbarMenuToggle
