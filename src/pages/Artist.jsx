@@ -9,7 +9,7 @@ function Artist() {
   if (isLoading) return <Spinner />
   return (
     <>
-    <div className='h-[88vh]  '>
+    <div className='h-[88vh]'>
       <SingerIcons singer={singer} />
     </div>
 <BottomBar/>

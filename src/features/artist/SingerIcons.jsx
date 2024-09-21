@@ -9,9 +9,9 @@ function SingerIcons({ singer }) {
 
   return (
     <>
-      <h1 className='pt-8 pb-4 pl-2 text-[2rem] text-white1 z-30'>Artist</h1>
-      <div className='flex justify-center'>
-        <div className='w-full px-8 xl:px-20 grid grid-cols-3 gap-[1rem]  lg:gap-[3rem] md:grid-cols-4 xl:grid-cols-5 py-[2rem]'>
+      <h1 className='pt-8 pb-4  text-[2rem] text-white1 z-30 w-full'>Artist</h1>
+      <div className='flex justify-center items-center'>
+        <div className='w-full pl-1 justify-items-center px- xl:px-20 grid grid-cols-3 gap-[2rem]  lg:gap-[3rem] md:grid-cols-4 xl:grid-cols-5 py-[2rem]'>
           {singer?.map((singer, index) => (
             <div
               key={index}
@@ -23,10 +23,10 @@ function SingerIcons({ singer }) {
                   handelArtist(singer.id, singer.title)
                 }}
                 alt={singer.nickName}
-                className='w-full h-[100%] object-cover rounded-full  '
+                className='w-full h-[95%] md:h-[100%]  md:w-full object-cover rounded-full  '
               />
-              <div className='text-center absolute top-[9.6rem] xl:top-[20rem] 5 rounded-b-[2rem] bottom-0 left-0 w-full bg-opacity-30 text-white p-2'>
-                <p className=' pl-2 text-sm md:text-lg xl:text-xl font-semibold '>
+              <div className='text-center absolute top-[9.6rem] xl:top-[20rem] 5 rounded-b-[2rem] bottom-0 left-0 w-full bg-opacity-30 text-white'>
+                <p className='text-sm md:text-lg xl:text-xl font-semibold '>
                   {/* {singer.nickName} */}
                 </p>
               </div>
