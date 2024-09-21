@@ -6,12 +6,10 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-  RadioGroup,
-  Radio,
 } from '@nextui-org/react'
 
 function DropDown() {
-  const [selectedColor, setSelectedColor] = React.useState('default')
+  const [selectedColor] = React.useState('default')
 
   const variants = ['']
 

@@ -10,7 +10,7 @@ import AlbumMusicChild from './AlbumMusicChild'
 function AlbumTrack() {
   const { data: music, isLoading } = useAlbumTrack()
   const { data: albums, isLoading: isAlbum } = useAlbum()
-  const { handelMusicOfAlbum } = useOpenPlayer()
+  const { handelFilterMusic } = useOpenPlayer()
   const { albumId } = useParams()
   // Find the album object with id equal to albumId
   const album = albums?.find((album) => album.id === parseInt(albumId))
@@ -22,7 +22,7 @@ function AlbumTrack() {
       <div
         className='h-[85vh]'
         onClick={() => {
-          handelMusicOfAlbum(music)
+          handelFilterMusic(music)
         }}
       >
         <h1 className='mt-[1rem] text-[2rem] text-white1 z-10'>

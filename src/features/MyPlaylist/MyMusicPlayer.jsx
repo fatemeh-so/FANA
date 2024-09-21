@@ -14,6 +14,7 @@ import { useOpenPlayer } from '../../contexts/openPlayerContext'
 import { useMyPlayer } from '../../contexts/MyMusicPLayerContext '
 import SliderMyPlaylist from '../../components/SliderMyPlaylist'
 import LikeButton from './LikeButton'
+import { usePlayer } from '../../contexts/musicPLayerContext'
 function MyMusicPlayer({ songValue }) {
   const { myMusic: music } = useOpenPlayer()
   const {
@@ -28,7 +29,7 @@ function MyMusicPlayer({ songValue }) {
     playNext,
     playPrev,
     musicUi,
-  } = useMyPlayer()
+  } = usePlayer()
 
   const [musicTrack, setMusicTrack] = useState(music)
 

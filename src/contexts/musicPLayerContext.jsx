@@ -1,10 +1,21 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import { useOpenPlayer } from './openPlayerContext'
 import { formatToSecs } from '../helper/formattedDuration'
 const MusicPlayerContext = createContext()
 function shuffleArray(array) {
-  const shuffledArray = [...array]
+  // Filter out any undefined or null items from the array
+  const filteredArray = array.filter(
+    (item) => item !== undefined && item !== null
+  )
+  const shuffledArray = [...filteredArray]
   for (let i = shuffledArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]
@@ -32,48 +43,90 @@ function MusicPLayerProvider({ children }) {
   const [skip, setSkip] = useState(currentMusic)
   const [prev, setPrev] = useState(currentMusic)
 
-
   useEffect(
     function play() {
       if (music && audioRef) {
         if (isPlay) {
           // when video is play
-
           audioRef.current.loop = isRepeat
-          audioRef.current.src = shuffledMusic?shuffledMusic[currentMusic].url:music.url
+          if (shuffledMusic[currentMusic]) {
+            audioRef.current.src = shuffledMusic[currentMusic]?.url
+          } else {
+            audioRef.current.src = music?.url
+          }
           audioRef.current.currentTime = valueTime
+
           audioRef.current.play()
+          // console.log('hbhbh', shuffledMusic[skip])
 
           if (playNext) {
             //when click on next btn
             setPlayPrev(false)
-            audioRef.current.src = shuffledMusic[skip].url
-            setMusicUi(shuffledMusic[skip])
+            if (shuffledMusic[skip]) {
+              audioRef.current.src = shuffledMusic[skip]?.url
+            } else {
+              audioRef.current.src = music?.url
+            }
+            if (shuffledMusic[skip]) {
+              setMusicUi(shuffledMusic[skip])
+            } else {
+              setMusicUi(music)
+            }
             audioRef.current.currentTime = valueTime
             audioRef.current.play()
           }
           if (playPrev) {
             // when user click on prev btn
             setPlayNext(false)
-            audioRef.current.src = shuffledMusic[prev].url
-            setMusicUi(shuffledMusic[prev])
+            if (shuffledMusic[prev]) {
+              audioRef.current.src = shuffledMusic[prev]?.url
+            } else {
+              audioRef.current.src = music?.url
+            }
+            if (shuffledMusic[prev]) {
+              setMusicUi(shuffledMusic[prev])
+            } else {
+              setMusicUi(music)
+            }
             audioRef.current.currentTime = valueTime
             audioRef.current.play()
+          }
+
+          // Event listener for when the song ends
+          audioRef.current.onended = () => {
+            // Automatically go to the next song when the current song ends
+            setPlayNext(true)
           }
         } else {
           audioRef.current.pause()
           if (playNext) {
             //when click on next btn
             setPlayPrev(false)
-            audioRef.current.src = shuffledMusic[skip].url
-            setMusicUi(shuffledMusic[skip])
+            if (shuffledMusic[skip]) {
+              audioRef.current.src = shuffledMusic[skip]?.url
+            } else {
+              audioRef.current.src = music?.url
+            }
+            if (shuffledMusic[skip]) {
+              setMusicUi(shuffledMusic[skip])
+            } else {
+              setMusicUi(music)
+            }
             audioRef.current.currentTime = valueTime
           }
           if (playPrev) {
             //when click on prev btn
             setPlayNext(false)
-            audioRef.current.src = shuffledMusic[prev].url
-            setMusicUi(shuffledMusic[[prev]])
+            if (shuffledMusic[prev]) {
+              audioRef.current.src = shuffledMusic[prev]?.url
+            } else {
+              audioRef.current.src = music?.url
+            }
+            if (shuffledMusic[prev]) {
+              setMusicUi(shuffledMusic[prev])
+            } else {
+              setMusicUi(music)
+            }
             audioRef.current.currentTime = valueTime
           }
         }
@@ -93,6 +146,7 @@ function MusicPLayerProvider({ children }) {
       playNext,
       playPrev,
       prev,
+      filterMusic,
     ]
   )
 
@@ -112,7 +166,6 @@ function MusicPLayerProvider({ children }) {
     } else {
       setShuffledMusic(filterMusic)
     }
-
     // Cleanup the timeout when the effect is re-run or the component is unmounted
     return () => {
       if (shuffleTimeout) {
@@ -121,25 +174,30 @@ function MusicPLayerProvider({ children }) {
     }
   }, [isShuffle, filterMusic, currentMusic, valueTime])
 
-  // useEffect(() => {
-  //   //when open music player.then ...
-  //   setPlayNext(false)
-  //   setPlayPrev(false)
-  //   setMusicUi(music)
-
-  //   setSkip(currentMusic)
-  // }, [isOpenPlayer])
+  useEffect(() => {
+    if (isShuffle) {
+      setIsShuffle(false)
+      setIsShuffle(true)
+      setShuffledMusic(filterMusic)
+    }
+  }, [ isShuffle,filterMusic])
 
   useEffect(() => {
-    //when open music player.then start from 0 sec ...
     if (isOpenPlayer === true) {
       setIsPlay(true)
       setSkip(currentMusic)
       setMusicUi(music)
       setSkip(currentMusic)
-
     }
   }, [isOpenPlayer])
+
+  useEffect(() => {
+    //when open music player.then start from current time
+    if (isOpenPlayer === true) {
+      audioRef.current.currentTime = valueTime
+    }
+  }, [isOpenPlayer])
+
 
   useEffect(() => {
     //it back current time to 0 when user click on next btn

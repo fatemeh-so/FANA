@@ -2,16 +2,15 @@
 import { Slider } from '@nextui-org/react'
 import {
     convertSecondsToTime,
-    formatDuration,
     formatToSecs,
 } from '../helper/formattedDuration'
 import { useEffect } from 'react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
+import { usePlayer } from '../contexts/musicPLayerContext'
 
 export default function SliderSinger({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
-  const { valueTime, setValueTime, playNext, playPrev, musicUi } = useArtistPlayer()
+  const { setValueTime, playNext, playPrev, musicUi } = usePlayer()
   let musicTrack
   if (playPrev || playNext) {
     musicTrack = musicUi
@@ -21,7 +20,6 @@ export default function SliderSinger({ songValue = '00:00' }) {
   function handel(value) {
     setValueTime(value)
   }
-  const formattedDuration = formatDuration(musicTrack?.duration)
 
   const formattedToSeconds = formatToSecs(musicTrack?.duration)
 

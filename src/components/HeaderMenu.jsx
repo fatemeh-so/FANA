@@ -2,7 +2,6 @@ import { Button } from '@nextui-org/react'
 import { List, X } from '@phosphor-icons/react'
 
 function HeaderMenu({ handelMenu, isOpen }) {
-  //   const [isOpen, setIsOpen] = useState(true)
   return (
     <>
       <div className=' relative flex  '>

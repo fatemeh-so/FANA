@@ -11,7 +11,6 @@ export default function HomeAlbum() {
     navigate('/albums')
   }
 
-  console.log(albums)
   if (isLoading) {
     return <Spinner />
   }

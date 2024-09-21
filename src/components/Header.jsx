@@ -9,11 +9,8 @@ import {
   NavbarItem,
   Link
 } from '@nextui-org/react'
-// import { Input } from "postcss";
 import { NavLink } from 'react-router-dom'
-// import { useDeleteHeader } from '../contexts/deleteHeaderContext'
 import SearchInput from './SearchInput'
-// import {AcmeLogo} from "./AcmeLogo.jsx";
 
 
 export default function Header() {

@@ -10,7 +10,7 @@ import Spinner from '../../components/Spinner'
 
 function AlbumMusicChild({ music, index}) {
   const { title, artist, coverArt, duration,url } = music
-  const { handelAlbumMusic } = useOpenPlayer()
+  const { handelPlayMusic } = useOpenPlayer()
   const [isLike, setIsLike] = useState(false)
   
   const { mutate: addMusic, isLoading } = useAddInPlaylist()
@@ -26,7 +26,7 @@ function AlbumMusicChild({ music, index}) {
         <div
           className='flex items-center'
           onClick={() => {
-            handelAlbumMusic(music, index)
+            handelPlayMusic(music, index)
           }}
         >
           <span className='ml-2 font-thin  text-[.8rem] '>{index}</span>

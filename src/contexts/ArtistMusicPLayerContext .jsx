@@ -224,7 +224,6 @@ function ArtistPlayerProvider({ children }) {
 }
 function useArtistPlayer() {
   const context = useContext(ArtistPlayerContext)
-
   if (context === undefined)
     throw new Error('OpenAlbumContext was used outside of DarkModeProvider')
   return context

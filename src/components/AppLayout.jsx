@@ -15,23 +15,20 @@ import { useArtistPlayer } from '../contexts/ArtistMusicPLayerContext '
 function AppLayout() {
   const { isOpenPlayer, isOpenPlayList, isOpenAlbumMusic, isOpenArtistMusic } =
     useOpenPlayer()
-  const { searchFocus } = useSearchFocus()
+  const { searchFocus } = useSearchFocus()  
   const { pathname } = useLocation()
-  const { audioRef, audioSrc, playNextFunc } = usePlayer()
+  const { audioRef, audioSrc, handelPlayNext } = usePlayer()
   const {
     audioRef: audioRef1,
     audioSrc: audioSrc1,
-    playNextFunc: myPlayNextFunc,
   } = useMyPlayer()
   const {
     audioRef: audioRefAlbum,
     audioSrc: audioSrcAlbum,
-    playNextFunc: albumPlayNextFunc,
   } = useAlbumPlayer()
   const {
     audioRef: audioRefArtist,
     audioSrc: audioSrcArtist,
-    playNextFunc: artistPlayNextFunc,
   } = useArtistPlayer()
 
   const [songValue, setSongValue] = useState()
@@ -58,18 +55,7 @@ function AppLayout() {
     const currentTime = audioRefArtist.current.currentTime
     setSongValueArtist(currentTime)
   }
-  function handelEnd() {
-    playNextFunc()
-  }
-  function handelEndPlaylist() {
-    myPlayNextFunc()
-  }
-  function handelEndAlbum() {
-    albumPlayNextFunc()
-  }
-  function handelEndArtist() {
-    artistPlayNextFunc()
-  }
+ 
   useEffect(() => {}, [])
   return (
     <div className='text-white1 overflow-y-scroll bg-gradient-to-b from-gray-900 via-gray-900 to-gray900 opacity-[94%]'>
@@ -84,31 +70,31 @@ function AppLayout() {
         ref={audioRef}
         src={audioSrc}
         onTimeUpdate={handel}
-        onEnded={handelEnd}
+        onEnded={()=>handelPlayNext()}
       />
       {/* audio for playlist */}
       <audio
         ref={audioRef1}
         src={audioSrc1}
         onTimeUpdate={handel1}
-        onEnded={handelEndPlaylist}
+        // onEnded={handelEndPlaylist}
       />
       {/* audio for album */}
       <audio
         ref={audioRefAlbum}
         src={audioSrcAlbum}
         onTimeUpdate={handelAlbum}
-        onEnded={handelEndAlbum}
+        // onEnded={handelEndAlbum}
       />
       <audio
         ref={audioRefArtist}
         src={audioSrcArtist}
         onTimeUpdate={handelArtist}
-        onEnded={handelEndArtist}
+        // onEnded={handelEndArtist}
       />
 
       <main className='h-[100vh] w-[100%]'>
-        <div className='flex flex-col items-center'>
+        <div className='flex w-full flex-col items-center'>
           {pathname === '/home' && <Header />}
           {searchFocus && <SearchResult />}
           <div className='h-[100%] flex flex-col justify-between w-[90%]'>

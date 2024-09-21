@@ -10,9 +10,9 @@ import {
 } from '@phosphor-icons/react'
 import { ModalContent, ModalHeader } from '@nextui-org/react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { useAlbumPlayer } from '../contexts/AlbumMusicPlayerContext'
 import SliderAlbum from './SliderAlbum'
 import { useEffect, useState } from 'react'
+import { usePlayer } from '../contexts/musicPLayerContext'
 function MusicPlayerAlbum({ songValue }) {
   const { albumMusic: music } = useOpenPlayer()
   const {
@@ -27,7 +27,7 @@ function MusicPlayerAlbum({ songValue }) {
     playNext,
     playPrev,
     musicUi,
-  } = useAlbumPlayer()
+  } = usePlayer()
   const [musicTrack, setMusicTrack] = useState(music)
 
   useEffect(() => {

@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { Input } from '@nextui-org/react'
 import { MagnifyingGlass, XCircle } from '@phosphor-icons/react'
-import SearchResult from './SearchResult'
 import { useSearchFocus } from '../contexts/FocusSearchContext'
 
 
@@ -14,13 +12,11 @@ const SearchInput = () => {
     searchValue,
     handleSearch,
     setSearchFocus,
-    setSearchValue
   } = useSearchFocus()
 
   const handleClearInput = () => {
     // Clear the search value when the clear icon is clicked
     setSearchFocus(false)
-    // setSearchValue(null)
   }
 
   return (
@@ -30,7 +26,6 @@ const SearchInput = () => {
         onFocus={() => handelFocus(searchResults)}
         onBlur={() => handleInputBlur(true)}
         value={searchValue}
-        // isClearable
         radius='sm'
         classNames={{
           input: [

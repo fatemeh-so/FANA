@@ -11,7 +11,7 @@ import { useOpenPlayer } from '../contexts/openPlayerContext'
 
 export default function Slider1({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
-  const { valueTime, setValueTime, playNext, playPrev, musicUi } = usePlayer()
+  const { setValueTime, playNext, playPrev, musicUi } = usePlayer()
   let musicTrack
   if (playPrev || playNext) {
     musicTrack = musicUi

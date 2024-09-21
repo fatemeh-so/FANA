@@ -1,8 +1,7 @@
-import { CaretLeft, FolderSimpleUser, Heart, UserCheck, UserCircle } from '@phosphor-icons/react'
-import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+/* eslint-disable react/prop-types */
+import { CaretLeft, FolderSimpleUser, Heart} from '@phosphor-icons/react'
+import { useNavigate } from 'react-router-dom'
 import { useOpenAlbum } from '../contexts/openAlbumContext'
-import { User } from '@nextui-org/react'
 
 function BottomHeader({ leftContent = true, size, to, icon }) {
   // const [searchParams,setIsOpenAlbum]=useSearchParams()
@@ -28,14 +27,13 @@ function BottomHeader({ leftContent = true, size, to, icon }) {
   }
 
   return (
-    <div className='flex justify-between  mt-[3rem]  '>
-      {' '}
+    <div className='flex justify-between py-8'>
       <button
         onClick={handelBack}
         className={
           size === 'small'
             ? 'flex z-10 mt-[-1rem] items-center justify-center bg-gray-700/60  w-[1.5rem] h-[1.5rem] rounded-[.5rem]'
-            : ' flex z-10 items-center justify-center bg-gray-700/60  w-[2.5rem] h-[2.5rem] rounded-[.8rem] '
+            : 'flex z-10 items-center justify-center bg-gray-700/60  w-[2.5rem] h-[2.5rem] rounded-[.8rem] '
         }
       >
         {size === 'small' ? (
@@ -49,7 +47,7 @@ function BottomHeader({ leftContent = true, size, to, icon }) {
           className={
             size === 'small'
               ? 'flex z-10 mt-[-1rem] items-center justify-center bg-gray-700/60  w-[1.5rem] h-[1.5rem] rounded-[.5rem]'
-              : ' flex z-10 items-center justify-center bg-gray-700/60  w-[2.5rem] h-[2.5rem] rounded-[.8rem] '
+              : 'flex z-10 items-center justify-center bg-gray-700/60  w-[2.5rem] h-[2.5rem] rounded-[.8rem] '
           }
         >
           {/* <UserCheck size={20} color='#f5f0f5' /> */}

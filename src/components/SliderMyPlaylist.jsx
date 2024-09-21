@@ -7,11 +7,11 @@ import {
 } from '../helper/formattedDuration'
 import { useEffect } from 'react'
 import { useOpenPlayer } from '../contexts/openPlayerContext'
-import { useMyPlayer } from '../contexts/MyMusicPLayerContext '
+import { usePlayer } from '../contexts/musicPLayerContext'
 
 export default function SliderMyPlaylist({ songValue = '00:00' }) {
   const { music } = useOpenPlayer()
-  const { valueTime, setValueTime, playNext, playPrev, musicUi } = useMyPlayer()
+  const { setValueTime, playNext, playPrev, musicUi } = usePlayer()
   let musicTrack
   if (playPrev || playNext) {
     musicTrack = musicUi

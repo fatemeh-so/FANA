@@ -1,7 +1,5 @@
 import { Tabs, Tab } from '@nextui-org/react'
 import { useSearchParams } from 'react-router-dom'
-import { ScrollShadow } from '@nextui-org/react'
-import { memo } from 'react'
 function Filter() {
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -39,4 +37,4 @@ function Filter() {
   )
 }
 
-export default memo(Filter)
+export default Filter

@@ -6,7 +6,7 @@ import Spinner from '../components/Spinner'
 import useSignup from '../features/auth/useSignUp'
 // import BottomHeader from '../components/BottomHeader'
 function SignUp() {
-  const { register, getValues, formState, handleSubmit, reset } = useForm()
+  const { register, getValues, formState, handleSubmit } = useForm()
   const { errors } = formState
   const { isLoading, mutate: signUp } = useSignup()
   const navigate = useNavigate()

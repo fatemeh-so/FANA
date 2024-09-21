@@ -2,7 +2,6 @@ import Album from '../features/Albums/Album'
 import BottomBar from '../components/BottomBar'
 import useAlbum from '../features/Albums/useAlbum'
 import Spinner from '../components/Spinner'
-import BottomHeader from '../components/BottomHeader'
 
 function Albums() {
   const { data: albums, isLoading } = useAlbum()
@@ -11,10 +10,9 @@ function Albums() {
   }
   return (
     <>
-  
       <div className='h-[88vh]  '>  
         <Album albums={albums} />
-      </div>{' '}
+      </div>
       <BottomBar />
     </>
   )

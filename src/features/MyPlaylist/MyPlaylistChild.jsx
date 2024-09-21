@@ -8,7 +8,7 @@ import { useDeletePlaylist } from './useDelete'
 function HomeMusicChild({ music, index }) {
   const { id, title, artist, coverArt, duration,url } = music
   const { mutate: deletePlaylist, isLoading } = useDeletePlaylist()
-  const { handelMyPlay } = useOpenPlayer()
+  const { handelPlayMusic } = useOpenPlayer()
   function handelTrash(musicId) {
     deletePlaylist(musicId)
   }
@@ -18,7 +18,7 @@ function HomeMusicChild({ music, index }) {
         <div
           className='flex items-center'
           onClick={() => {
-            handelMyPlay(music)
+            handelPlayMusic(music)
           }}
         >
           <span className='ml-2 font-thin'>{index}</span>
